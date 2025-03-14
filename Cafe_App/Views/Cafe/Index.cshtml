@@ -1,0 +1,50 @@
+@using Cafe_App.Services
+@model Cafe_App.Models.Cafe.CafeIndexViewModel
+@inject AuthService authService
+
+@{
+    Layout = "~/Views/Shared/_LayoutCafe.cshtml";
+}
+
+@section Styles {
+    <link href="~/css/cafe/index.css" rel="stylesheet"/>
+}
+
+<div class="cafe-container">
+    <!-- Левая часть: картинка, заголовок, адрес -->
+    <div class="cafe-left">
+        <!-- Заголовок -->
+        <h2 class="cafe-title">@Model.Title</h2>
+
+        <!-- Картинка -->
+        <img src="@Model.ImageSrc" alt="Cafe Image" class="cafe-image" />
+
+        <!-- Адрес -->
+        <p class="cafe-address">@Model.Address</p>
+
+        <div class="cafe-stars">
+            @for (int i = 0; i < Model.Rang; i++)
+            {
+                <span>★</span>
+            }
+        </div>
+        <p class="cafe-rating">Rating: @Model.Rang</p>
+    </div>
+
+    <!-- Адрес -->
+    <p class="cafe-address">@Model.Address</p>
+</div>
+
+<!-- Кнопка действия -->
+<div style="text-align: center;">
+    @if (authService.IsAdmin())
+    {
+        <!-- Кнопка для администратора -->
+        <button onclick="deleteCafe()" class="cafe-button cafe-button-delete">Delete</button>
+    }
+    else
+    {
+        <!-- Кнопка для пользователя -->
+        <button onclick="moreInfo()" class="cafe-button cafe-button-more">Information</button>
+    }
+</div>

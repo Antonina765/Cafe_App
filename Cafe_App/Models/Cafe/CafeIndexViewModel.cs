@@ -1,6 +1,6 @@
 namespace Cafe_App.Models.Cafe;
 
-public class CafeInfoViewModel
+public class CafeIndexViewModel
 {
     public int CafeId { get; set; }
     

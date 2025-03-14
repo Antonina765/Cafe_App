@@ -1,0 +1,26 @@
+@using Cafe_App.Services
+@inject UserService userService
+<!DOCTYPE html>
+<html>
+<head>
+    <title> Authorisation </title>
+    <link href="~/css/Auth/style.css" rel="stylesheet" />
+    @* <script src="~/lib/jquery/dist/jquery.min.js"></script> *@
+    @RenderSection("Scripts", false)
+</head>
+<body>
+<header class="head-page">
+    <div class="logotip">
+        <img src="~/images/Ecology/logotip.JPG" alt="logotip" />
+    </div>
+    <h2 class="name">@ViewBag.PageTitle</h2>
+    <div class="block-of-profile">
+        <img src="@userService.GetAvatar()" alt="" class="defaltavatar" />
+        <li><a class="log-sing" href="/Ecology/EcologyProfile"></a></li>
+    </div>
+</header>
+    <div class="content">
+        @RenderBody()
+    </div>
+</body>
+</html>

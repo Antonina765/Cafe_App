@@ -7,7 +7,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Localizations\" />
       <Folder Include="wwwroot\images\cafes\" />
     </ItemGroup>
 
@@ -29,6 +28,26 @@
       </PackageReference>
       <PackageReference Include="Npgsql" Version="9.0.3" />
       <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.3" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Update="Localizations\Cafe.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Cafe.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Localizations\Cafe.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Cafe.resx</DependentUpon>
+      </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Views\Home\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Home\Privacy.cshtml" />
     </ItemGroup>
 
 </Project>

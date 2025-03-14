@@ -1,0 +1,41 @@
+@using Cafe_App.Services
+@inject UserService userService
+<!DOCTYPE html>
+<html>
+<head>
+    <title> Cafe app </title>
+    <link href="~/css/cafe/style.css" rel="stylesheet" />
+    <link href="~/css/cafe/button.css" rel="stylesheet" />
+    
+    @*<script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/js/ajaxHelper.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script> *@
+    @RenderSection("Styles", false)
+</head>
+<body>
+    <header class="head-page">
+        <div class="logotip">
+            <img src="~/images/cafes/logotip.JPG" alt="logotip" />
+        </div>
+        <div class="name">Cafes</div>
+        <div class="block-of-profile">
+            <img src="@userService.GetAvatar()" alt="" class="defaltavatar" />
+            <li><a class="log-sing" href="/Cafe/Profile"></a></li>
+        </div>
+    </header>
+
+    <!-- Меню под шапкой, такой же ширины -->
+    <div class="menu-bar">
+        <nav>
+            <ul class="menu-list">
+                <li class="menu-item"><a href="/Cafe/Index">Cafes</a></li>
+                <li class="menu-item"><a href="/Cafe/Chat">Chat</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <main>
+        @RenderBody()
+    </main>
+</body>
+</html>

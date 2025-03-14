@@ -1,0 +1,17 @@
+@model Cafe_App.Models.Cafe.CafeCreationViewModel
+
+@{
+    Layout = "~/Views/Shared/_LayoutCafe.cshtml";
+}
+
+<form method="post">
+    <div>
+        @Html.TextBoxFor(x => x.Title, new { placeholder = "Enter title" })
+        @Html.ValidationMessageFor(x => x.Title)
+    </div>
+    <div>
+        @Html.TextBoxFor(x => x.ImageSrc, new { placeholder = "Enter a way to image" })
+        @Html.ValidationMessageFor(x => x.ImageSrc)
+    </div>
+    <button type="submit">Create</button>
+</form>

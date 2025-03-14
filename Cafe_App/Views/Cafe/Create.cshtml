@@ -1,0 +1,34 @@
+@model Cafe_App.Models.Cafe.CafeCreationViewModel
+
+@{
+    Layout = "~/Views/Shared/_LayoutCafe.cshtml";
+}
+
+<form method="post">
+    <div>
+        <label for="title">Title</label>
+        @Html.TextBoxFor(x => x.Title, new { placeholder = "Enter title", id ="title" })
+        @Html.ValidationMessageFor(x => x.Title)
+    </div>
+    <div>
+        <label for="imageSrc">Image URL</label>
+        @Html.TextBoxFor(x => x.ImageSrc, new { placeholder = "Enter a way to picture", id ="imageSrc" })
+        @Html.ValidationMessageFor(x => x.ImageSrc)
+    </div>
+    <div>
+        <label for ="imageFile">Upload Image</label>
+        <input type="file" id = "imageFile" name ="ImageFile"/>
+        @Html.ValidationMessageFor(x=> x.ImageFile)
+    </div>
+    <div>
+        <label for ="address">Address</label>
+        @Html.TextBoxFor(x => x.Address, new { placeholder = "Adress", id="address" })
+        @Html.ValidationMessageFor(x => x.Address)
+    </div>
+    <div>
+        <label for="rang">Rang</label>
+        @Html.TextBoxFor(x => x.Rang, new { placeholder = "Rang", @type = "number", id="rang" })
+        @Html.ValidationMessageFor(x => x.Rang)
+    </div>
+    <button type="submit">Create</button>
+</form>
