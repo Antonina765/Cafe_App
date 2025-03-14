@@ -8,10 +8,12 @@
 
     <ItemGroup>
       <Folder Include="Localizations\" />
+      <Folder Include="wwwroot\images\cafes\" />
     </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\Cafe.Data.Interface\Cafe.Data.Interface.csproj" />
+      <ProjectReference Include="..\Cafe.Data\Cafe.Data.csproj" />
       <ProjectReference Include="..\Enums\Enums.csproj" />
     </ItemGroup>
 

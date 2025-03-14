@@ -1,0 +1,14 @@
+﻿@using Cafe_App.Models.Auth
+@model RegisterUserViewModel
+
+<form method="post">
+    <div>
+        @Html.TextBoxFor(x => x.UserName, new { placeholder = "логин" })
+    </div>
+    <div>
+        @Html.TextBoxFor(x => x.Password, new { @type = "password", placeholder = "пароль" })
+    </div>
+    <div>
+        <button type="submit">Логин</button>
+    </div>
+</form>

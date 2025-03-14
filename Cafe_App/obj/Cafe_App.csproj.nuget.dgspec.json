@@ -4,6 +4,184 @@
     "/Users/antoninaber/Desktop/Cafe_App/Cafe_App/Cafe_App.csproj": {}
   },
   "projects": {
+    "/Users/antoninaber/Desktop/Cafe_App/Cafe.Data.Interface/Cafe.Data.Interface.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/antoninaber/Desktop/Cafe_App/Cafe.Data.Interface/Cafe.Data.Interface.csproj",
+        "projectName": "Cafe.Data.Interface",
+        "projectPath": "/Users/antoninaber/Desktop/Cafe_App/Cafe.Data.Interface/Cafe.Data.Interface.csproj",
+        "packagesPath": "/Users/antoninaber/.nuget/packages/",
+        "outputPath": "/Users/antoninaber/Desktop/Cafe_App/Cafe.Data.Interface/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/antoninaber/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net9.0"
+        ],
+        "sources": {
+          "/usr/local/share/dotnet/library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net9.0": {
+            "targetAlias": "net9.0",
+            "projectReferences": {
+              "/Users/antoninaber/Desktop/Cafe_App/Enums/Enums.csproj": {
+                "projectPath": "/Users/antoninaber/Desktop/Cafe_App/Enums/Enums.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net9.0": {
+          "targetAlias": "net9.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[9.0.3, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[9.0.3, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[9.0.3, )"
+            },
+            "Npgsql": {
+              "target": "Package",
+              "version": "[9.0.3, )"
+            },
+            "Npgsql.EntityFrameworkCore.PostgreSQL": {
+              "target": "Package",
+              "version": "[9.0.3, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.200/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/antoninaber/Desktop/Cafe_App/Cafe.Data/Cafe.Data.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/antoninaber/Desktop/Cafe_App/Cafe.Data/Cafe.Data.csproj",
+        "projectName": "Cafe.Data",
+        "projectPath": "/Users/antoninaber/Desktop/Cafe_App/Cafe.Data/Cafe.Data.csproj",
+        "packagesPath": "/Users/antoninaber/.nuget/packages/",
+        "outputPath": "/Users/antoninaber/Desktop/Cafe_App/Cafe.Data/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/antoninaber/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net9.0"
+        ],
+        "sources": {
+          "/usr/local/share/dotnet/library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net9.0": {
+            "targetAlias": "net9.0",
+            "projectReferences": {
+              "/Users/antoninaber/Desktop/Cafe_App/Cafe.Data.Interface/Cafe.Data.Interface.csproj": {
+                "projectPath": "/Users/antoninaber/Desktop/Cafe_App/Cafe.Data.Interface/Cafe.Data.Interface.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net9.0": {
+          "targetAlias": "net9.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[9.0.3, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[9.0.3, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[9.0.3, )"
+            },
+            "Npgsql": {
+              "target": "Package",
+              "version": "[9.0.3, )"
+            },
+            "Npgsql.EntityFrameworkCore.PostgreSQL": {
+              "target": "Package",
+              "version": "[9.0.3, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.200/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
     "/Users/antoninaber/Desktop/Cafe_App/Cafe_App/Cafe_App.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -12,6 +190,104 @@
         "projectPath": "/Users/antoninaber/Desktop/Cafe_App/Cafe_App/Cafe_App.csproj",
         "packagesPath": "/Users/antoninaber/.nuget/packages/",
         "outputPath": "/Users/antoninaber/Desktop/Cafe_App/Cafe_App/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/antoninaber/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net9.0"
+        ],
+        "sources": {
+          "/usr/local/share/dotnet/library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net9.0": {
+            "targetAlias": "net9.0",
+            "projectReferences": {
+              "/Users/antoninaber/Desktop/Cafe_App/Cafe.Data.Interface/Cafe.Data.Interface.csproj": {
+                "projectPath": "/Users/antoninaber/Desktop/Cafe_App/Cafe.Data.Interface/Cafe.Data.Interface.csproj"
+              },
+              "/Users/antoninaber/Desktop/Cafe_App/Cafe.Data/Cafe.Data.csproj": {
+                "projectPath": "/Users/antoninaber/Desktop/Cafe_App/Cafe.Data/Cafe.Data.csproj"
+              },
+              "/Users/antoninaber/Desktop/Cafe_App/Enums/Enums.csproj": {
+                "projectPath": "/Users/antoninaber/Desktop/Cafe_App/Enums/Enums.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net9.0": {
+          "targetAlias": "net9.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[9.0.3, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[9.0.3, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[9.0.3, )"
+            },
+            "Npgsql": {
+              "target": "Package",
+              "version": "[9.0.3, )"
+            },
+            "Npgsql.EntityFrameworkCore.PostgreSQL": {
+              "target": "Package",
+              "version": "[9.0.3, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.200/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/antoninaber/Desktop/Cafe_App/Enums/Enums.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/antoninaber/Desktop/Cafe_App/Enums/Enums.csproj",
+        "projectName": "Enums",
+        "projectPath": "/Users/antoninaber/Desktop/Cafe_App/Enums/Enums.csproj",
+        "packagesPath": "/Users/antoninaber/.nuget/packages/",
+        "outputPath": "/Users/antoninaber/Desktop/Cafe_App/Enums/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/antoninaber/.nuget/NuGet/NuGet.Config"
@@ -55,9 +331,6 @@
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {
-            "Microsoft.AspNetCore.App": {
-              "privateAssets": "none"
-            },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
