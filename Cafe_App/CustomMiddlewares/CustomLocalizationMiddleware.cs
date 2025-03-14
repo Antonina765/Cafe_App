@@ -2,6 +2,8 @@
 using System.Text.RegularExpressions;
 using Cafe_App.Services;
 using Cafe.Data.Interface.Models;
+using Cafe.Data.Interface.Repositories;
+using Cafe.Data.Models;
 using Cafe.Data.Repositories;
 using Enums.Users;
 
@@ -19,12 +21,12 @@ namespace Cafe_App.CustomMiddlewares
         public async Task InvokeAsync(HttpContext context)
         {
             var authService = context.RequestServices.GetRequiredService<AuthService>();
-            var userRepositry = context.RequestServices.GetRequiredService<IUserRepositry>();
+            var userRepositry = context.RequestServices.GetRequiredService<IUserRepository<UserData>>();
 
             if (authService.IsAuthenticated())
             {
                 var user = userRepositry.Get(authService.GetUserId()!.Value)!;
-                SwitchLanguage(user.Languages);
+                SwitchLanguage(user.Language);
                 await _next.Invoke(context);
                 return;
             }
@@ -38,19 +40,6 @@ namespace Cafe_App.CustomMiddlewares
                 return;
             }
             
-            //if (context.Request.Headers.ContainsKey("accept-language"))
-            //{
-            //    var langFromHeader = context.Request.Headers["accept-language"].FirstOrDefault();
-            //    if (langFromHeader is not null)
-            //    {
-            //        var localStrCode = langFromHeader.Substring(0, 5);
-            //        var culture = new CultureInfo(localStrCode);
-            //        SwitchLanguage(culture);
-            //        await _next.Invoke(context);
-            //        return;
-            //    }
-            //}
-           
             await _next.Invoke(context);
         }
 
@@ -67,7 +56,7 @@ namespace Cafe_App.CustomMiddlewares
                     culture = new CultureInfo("en-US");
                     break;
                 default:
-                    throw new Exception("Unknown languge");
+                    throw new Exception("Unknown language");
             }
 
             SwitchLanguages(culture);

@@ -41,7 +41,7 @@ public class CafeController : Controller
         
         var cafesViewModels = cafesFromDb
             .Select(dbCafe =>
-                new CafeInfoViewModel
+                new CafeIndexViewModel
                 {
                     CafeId = dbCafe.Id,
                     Title = dbCafe.Title,

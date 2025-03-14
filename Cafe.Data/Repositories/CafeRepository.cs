@@ -37,6 +37,11 @@ public class CafeRepository : BaseRepository<CafeData>, ICafeRepository<CafeData
         _webDbContext.SaveChanges();
     }
 
+    public bool IsTitleUniq(string title)
+    {
+        return !_dbSet.Any(x => x.Title == title);
+    }
+    
     public void UpdateTitle(int id, string newTitle)
     {
         var cafe = _dbSet.First(x => x.Id == id);

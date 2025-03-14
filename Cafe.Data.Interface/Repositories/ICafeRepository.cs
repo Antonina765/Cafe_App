@@ -12,4 +12,6 @@ public interface ICafeRepository<CafeData> : IBaseRepository<CafeData>
     void UpdateImage(int Id, string url);
     
     void UpdateTitle(int Id, string newTitle);
+    
+    bool IsTitleUniq(string title);
 }
