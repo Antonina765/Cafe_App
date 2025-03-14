@@ -1,13 +1,15 @@
+using Cafe.Data.Interface.Models;
 using Enums.Users;
 
 namespace Cafe.Data.Interface.Repositories;
 
-public interface IUserRepository<UserData>
+public interface IUserRepository<T> : IBaseRepository<T>
+    where T : IUser
 {
     string GetAvatarUrl(int userId);
     string GetUserName(int userId);
     bool IsAdminExist();
-    UserData? Login(string login, string password);
+    IUser? Login(string login, string password);
     
     //void Register(string login, string password, string avatarUrl, Role role = Role.User);
     

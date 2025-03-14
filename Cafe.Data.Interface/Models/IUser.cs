@@ -9,5 +9,6 @@ public interface IUser : IBaseModel
     public string Password { get; set; }
     public string AvatarUrl { get; set; }
 
+    public Languages Language { get; set; }
     public Roles Role { get; set; }
 }

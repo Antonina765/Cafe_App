@@ -1,12 +1,12 @@
 namespace Cafe.Data.Interface.Models;
 
-public interface ICafeData
+public interface ICafeData : IBaseModel
 {
     string Title { get; set; }
     
-    string Adres { get; set; }
+    string Address { get; set; }
     
-    double Rank { get; set; }
+    double Rang { get; set; }
     
     string ImageSrc { get; set; }
 }

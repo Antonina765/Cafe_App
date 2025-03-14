@@ -1,5 +1,6 @@
 using Cafe.Data.Interface.Repositories;
 using Cafe.Data.Models;
+using Enums.Users;
 
 namespace Cafe.Data.Repositories;
 
@@ -11,9 +12,14 @@ public class CafeRepository : BaseRepository<CafeData>, ICafeRepository<CafeData
 
     public int CreateCafe(CafeData cafeData, int currentUserId)
     {
-        var creatorId = _webDbContext.Users.First(u => u.Id == currentUserId);
+        var user = _webDbContext.Users.First(x => x.Id == currentUserId);
 
-        cafeData.Creator = creatorId;
+        // Проверяем, что пользователь является администратором
+        if (user.Role != Roles.Admin)
+        {
+            throw new UnauthorizedAccessException("Только администраторы могут добавлять данные.");
+        }
+        
         return Add(cafeData);
     }
 
@@ -31,7 +37,7 @@ public class CafeRepository : BaseRepository<CafeData>, ICafeRepository<CafeData
         _webDbContext.SaveChanges();
     }
 
-    public void UpdateName(int id, string newTitle)
+    public void UpdateTitle(int id, string newTitle)
     {
         var cafe = _dbSet.First(x => x.Id == id);
 

@@ -19,7 +19,7 @@ public class WebDbContext : DbContext
         optionsBuilder.UseNpgsql(CONNECTION_STRING);
     }
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    /*protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
 
@@ -30,5 +30,5 @@ public class WebDbContext : DbContext
             .WithOne(x => x.Creator)
             .OnDelete(DeleteBehavior.Restrict)
             .HasForeignKey(p => p.CreatorId);
-    }
+    }*/
 }

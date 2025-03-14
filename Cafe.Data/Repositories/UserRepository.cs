@@ -1,4 +1,5 @@
-﻿using Cafe.Data.Interface.Repositories;
+﻿using Cafe.Data.Interface.Models;
+using Cafe.Data.Interface.Repositories;
 using Cafe.Data.Models;
 using Enums.Users;
 
@@ -35,7 +36,7 @@ public class UserRepository : BaseRepository<UserData>, IUserRepository<UserData
         return _dbSet.Any(x => x.Role.HasFlag(Roles.Admin));
     }
     
-    public UserData? Login(string login, string password)
+    public IUser? Login(string login, string password)
     {
         var brokenPassword = BrokePassword(password);
 
