@@ -160,7 +160,7 @@ public class CafeController : Controller
         else 
         {
             viewModel.UserName = "Guest";
-            viewModel.AvatarUrl = "~/images/avatars/defaltavatar.JPG";
+            viewModel.AvatarUrl = "~/images/avatars/avatar.png";
         }
    
         return View(viewModel);

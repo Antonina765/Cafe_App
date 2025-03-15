@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.SignalR;
+using IWebHostEnvironment = Microsoft.AspNetCore.Hosting.IWebHostEnvironment;
 
 namespace Cafe_App.Controllers;
 public class AuthController : Controller

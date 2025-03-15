@@ -41,7 +41,7 @@
 <body>
 <header class="head-page">
     <div class="logo">
-        <img src="~/images/cafes/logotip.JPG" alt="logo" />
+        <img src="~/images/cafes/logotype.png" alt="logo" />
     </div>
     <div>Welcome @(string.IsNullOrEmpty(Model.UserName) ? "Guest" : Model.UserName)</div>
     <div class="reg-auth">
@@ -64,7 +64,7 @@
             @if (authService.IsAdmin())
             {
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Admin" href="/Cafe/Create">Create cafe</a>
+                    <a class="nav-link text-dark" href="/Cafe/Create">Create cafe</a>
                 </li>
             }
         </ul>
