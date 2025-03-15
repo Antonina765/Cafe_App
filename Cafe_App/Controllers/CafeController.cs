@@ -1,4 +1,5 @@
 using System.Security.Claims;
+using Cafe_App.Attributes.AuthAttributes;
 using Cafe_App.Models.Cafe;
 using Cafe_App.Services;
 using Cafe.Data.Interface.Models;
@@ -81,12 +82,12 @@ public class CafeController : Controller
             return Unauthorized("Только администраторы могут создавать новое кафе.");
         }
         
-        if (_cafeRepository.HasSimilarTitles(viewModel.Title))
+        /*if (_cafeRepository.HasSimilarTitles(viewModel.Title))
         {
             ModelState.AddModelError(
                 nameof(CafeCreationViewModel.Title),
                 "Слишком похожее название");
-        }
+        }*/
 
         // Если ни файл не выбран, ни указан URL, добавляем ошибку модели
         if ((file == null || file.Length == 0) && string.IsNullOrWhiteSpace(viewModel.ImageSrc))
@@ -166,6 +167,28 @@ public class CafeController : Controller
         return View(viewModel);
     }
     
+    [IsAuthenticated]
+    [HttpPost]
+    public IActionResult UpdateAvatar(IFormFile avatar)
+    {
+        var webRootPath = _webHostEnvironment.WebRootPath;
+
+        var userId = _authService.GetUserId()!.Value;
+        var avatarFileName = $"avatar-{userId}.jpg";
+
+        var path = Path.Combine(webRootPath, "images", "avatars", avatarFileName);
+        using (var fileStream = new FileStream(path, FileMode.Create))
+        {
+            avatar
+                .CopyToAsync(fileStream)
+                .Wait();
+        }
+
+        var avatarUrl = $"/images/avatars/{avatarFileName}";
+        _userRepository.UpdateAvatarUrl(userId, avatarUrl);
+
+        return RedirectToAction("Profile");
+    }
     public IActionResult UpdateLocale(Languages language)
     {
         var userId = _authService.GetUserId()!.Value;
