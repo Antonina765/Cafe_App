@@ -3,6 +3,7 @@ using Cafe_App.Models.Admin;
 using Cafe_App.Services;
 using Cafe.Data.Interface.Models;
 using Cafe.Data.Interface.Repositories;
+using Cafe.Data.Models;
 using Enums.Users;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,11 +12,11 @@ namespace Cafe_App.Controllers
     [IsAdmin]
     public class AdminController : Controller
     {
-        private IUserRepository<IUser> _userRepository;
+        private IUserRepository<UserData> _userRepository;
         private EnumHelper _enumHelper;
 
         public AdminController(
-            IUserRepository<IUser> userRepositry, 
+            IUserRepository<UserData> userRepositry, 
             EnumHelper enumHelper)
         {
             _userRepository = userRepositry;

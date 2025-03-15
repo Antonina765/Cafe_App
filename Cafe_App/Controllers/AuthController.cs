@@ -3,6 +3,7 @@ using Cafe_App.Models.Auth;
 using Cafe_App.Services;
 using Cafe.Data.Interface.Models;
 using Cafe.Data.Interface.Repositories;
+using Cafe.Data.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
@@ -11,10 +12,10 @@ using Microsoft.AspNetCore.SignalR;
 namespace Cafe_App.Controllers;
 public class AuthController : Controller
 { 
-    public IUserRepository<IUser> _userRepository;
+    public IUserRepository<UserData> _userRepository;
     private IWebHostEnvironment _webHostEnvironment;
     
-    public AuthController(IUserRepository<IUser> userRepository, 
+    public AuthController(IUserRepository<UserData> userRepository, 
         IWebHostEnvironment webHostEnvironment)
     {
         _userRepository = userRepository;

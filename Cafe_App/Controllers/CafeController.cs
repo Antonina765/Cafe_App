@@ -12,13 +12,13 @@ namespace Cafe_App.Controllers;
 public class CafeController : Controller
 {
     private ICafeRepository<CafeData> _cafeRepository;
-    private IUserRepository<IUser> _userRepository;
+    private IUserRepository<UserData> _userRepository;
     private AuthService _authService;
     private IWebHostEnvironment _webHostEnvironment;
     private AutoMapperCafe _cafeMapper;
 
     public CafeController(ICafeRepository<CafeData> cafeRepository,
-        IUserRepository<IUser> userRepository,
+        IUserRepository<UserData> userRepository,
         AuthService authService,
         IWebHostEnvironment webHostEnvironment,
         AutoMapperCafe cafeMapper)
