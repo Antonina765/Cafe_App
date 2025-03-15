@@ -5,8 +5,8 @@
 
 @{
     // Генерация абсолютных путей к стилям с помощью Razor‑помощника
-    var lightThemeUrl = Url.Content("~/css/Ecology/profile.css");
-    var darkThemeUrl = Url.Content("~/css/Ecology/dark-profile.css");
+    var lightThemeUrl = Url.Content("~/css/cafe/profile.css");
+    var darkThemeUrl = Url.Content("~/css/cafe/dark-profile.css");
 
     // Если middleware передал тему через HttpContext.Items, используем её, иначе — по умолчанию "light"
     string theme = Context.Items["theme"] as string ?? "light";
@@ -64,7 +64,7 @@
             @if (authService.IsAdmin())
             {
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="CreateCafe">Create cafe</a>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Admin" href="/Cafe/Create">Create cafe</a>
                 </li>
             }
         </ul>
@@ -75,7 +75,7 @@
     </div>
     <div class="return-home">
         <ul>
-            <li><a class="return-home" href="/"></a></li>
+            <li><a class="return-home" href="/Cafe/Index"></a></li>
         </ul>
     </div>
 </header>

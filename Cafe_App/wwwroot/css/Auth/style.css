@@ -1,0 +1,74 @@
+body{
+    background-color: #FFFACD;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+header.head-page {
+    display: flex;
+    justify-content: space-between;
+    background-color: rgb(231, 245, 210) !important;
+    height: 80px;
+    align-items: center;
+    font-size: 25px;
+    border-bottom: 3px #083503 solid;
+}
+header .logotip {
+    display: flex;
+    align-items: center;
+}
+header .logotip img {
+    margin-left: 10px;
+    max-height: 50px;
+    border-radius: 50px;
+    border: 2px solid rgb(168, 225, 81);
+    width: 70px;
+}
+
+.block-of-profile {
+    align-items: center;
+    margin-right: 5px;
+}
+.block-of-profile .defaltavatar {
+    margin-left: 10px;
+    max-height: 50px;
+    border-radius: 50px;
+}
+.block-of-profile .log-sing {
+    margin-left: 20px;
+    display: block;
+    height: 20px;
+    width: 30px;
+    margin-top: -26px;
+}
+.block-of-profile .log-sing{
+    content: "L/S";
+    box-shadow: inset 0px 1px 3px 0px #91b8b3;
+    background: linear-gradient(to bottom, #14a404 5%, #049c20 100%);
+    background-color: #768d87;
+    border-radius: 13px;
+    border: 1px solid #695e56;
+    cursor: pointer;
+    display: inline-block;
+    color: #ffffff;
+    font-family: Arial;
+    text-decoration: none;
+    text-shadow: 0px -1px 0px #19a63d;
+    justify-content: center;
+    text-align: center;
+}
+.block-of-profile .log-sing:hover {
+    background: linear-gradient(to bottom, #5bfb49 5%, #43d83d 100%);
+    background-color: #fdf632;
+}
+.block-of-profile .log-sing:active {
+    position: relative;
+    top: 2px;
+}
+
+.content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

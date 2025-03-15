@@ -1,0 +1,31 @@
+.home-button{
+    background-image: url(../../images/cafes/home.jpg);
+    background-size: cover;
+    box-shadow: inset 0px 1px 3px 0px #91b8b3;
+    border-radius: 13px;
+    border: 1px solid #695e56;
+    display: inline-block;
+    cursor: pointer;
+    color: #ffffff;
+    font-family: Arial;
+    width: 42px;
+    height: 22px;
+    text-decoration: none;
+    text-shadow: 0px -1px 0px #19a63d;
+    transition: transform 0.3s ease-in-out;
+}
+.home-button:hover {
+    transform: scale(1.1);
+    background: linear-gradient(to bottom,#efc8f8 5%, #f7d0ec 100%);
+    background-color: #fdf632;
+}
+.home-button:hover::after{
+    content: "home";
+    display: flex;
+    align-items: center;
+    color: rgb(193, 44, 44);
+}
+.home-button:active {
+    position: relative;
+    top: 2px;
+}
