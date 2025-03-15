@@ -4,6 +4,14 @@
     Layout = "~/Views/Shared/_LayoutCafe.cshtml";
 }
 
+@section Styles {
+    <link href="~/css/cafe/create.css" rel="stylesheet"/>
+}
+
+@section Scripts {
+    <script src="~/js/imagePreview.js"></script>
+}
+
 <form method="post">
     <div>
         <label for="title">Title</label>
@@ -12,13 +20,17 @@
     </div>
     <div>
         <label for="imageSrc">Image URL</label>
-        @Html.TextBoxFor(x => x.ImageSrc, new { placeholder = "Enter a way to picture", id ="imageSrc" })
+        @Html.TextBoxFor(x => x.ImageSrc, new { placeholder = "Enter a way to picture", id ="imageSrc", oninput = "previewByUrl()" })
         @Html.ValidationMessageFor(x => x.ImageSrc)
     </div>
     <div>
         <label for ="imageFile">Upload Image</label>
-        <input type="file" id = "imageFile" name ="ImageFile"/>
+        <input type="file" id = "imageFile" name ="ImageFile"  onchange="previewByFile()"/>
         @Html.ValidationMessageFor(x=> x.ImageFile)
+    </div>
+    <!-- Превью изображения -->
+    <div id="imagePreview" style="margin-top: 20px;">
+        <p>No image selected.</p>
     </div>
     <div>
         <label for ="address">Address</label>

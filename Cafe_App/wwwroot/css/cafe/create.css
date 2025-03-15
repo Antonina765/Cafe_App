@@ -1,0 +1,106 @@
+:root {
+    --primary: #FFA07A;    /* LightSalmon */
+    --accent: #D2B48C;     /* Tan */
+    --background: #FFFACD; /* LemonChiffon */
+    --secondary: #808000;  /* Olive */
+    --text-color: #3E2723; /* Dark Brown */
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--background);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+form {
+    background-color: var(--accent);
+    border: 2px solid var(--primary);
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    width: 400px;
+    position: relative;
+    opacity: 0.9; /* Полупрозрачность */
+    transition: opacity 0.3s ease-in-out, transform 0.2s ease;
+}
+
+form:hover {
+    opacity: 1; /* Убираем полупрозрачность при наведении */
+    transform: scale(1.02); /* Лёгкое увеличение */
+}
+
+form div {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: var(--text-color);
+}
+
+input[type="text"],
+input[type="number"],
+input[type="file"],
+button {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid var(--primary);
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 14px;
+    background-color: white;
+    color: var(--text-color);
+    outline: none;
+    transition: all 0.2s ease-in-out;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="file"]:focus {
+    border-color: var(--secondary);
+    box-shadow: 0 0 8px rgba(128, 128, 0, 0.5);
+}
+
+button {
+    background-color: var(--primary);
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: var(--secondary);
+}
+
+#imagePreview {
+    margin-top: 15px;
+    text-align: center;
+    padding: 10px;
+    border: 1px dashed var(--primary);
+    border-radius: 10px;
+    background-color: rgba(255, 160, 122, 0.1); /* Лёгкая прозрачность */
+    min-height: 150px;
+}
+
+#imagePreview img {
+    max-width: 100%;
+    max-height: 120px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+#imagePreview p {
+    font-style: italic;
+    color: var(--secondary);
+}

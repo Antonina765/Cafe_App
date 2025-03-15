@@ -1,4 +1,4 @@
-﻿using Cafe_App.Controllers.AuthAttributes;
+﻿using Cafe_App.Attributes.AuthAttributes;
 using Cafe_App.Models.Admin;
 using Cafe_App.Services;
 using Cafe.Data.Interface.Models;

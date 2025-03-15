@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using Cafe.Data.Interface.Repositories;
 using Cafe.Data.Models;
 
-namespace Cafe_App.Models.CustomValidationAttrubites
+namespace Cafe_App.Attributes.CustomValidationAttrubites
 {
     public class UniqTitleAttribute : ValidationAttribute
     {

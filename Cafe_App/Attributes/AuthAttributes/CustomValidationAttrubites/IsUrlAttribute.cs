@@ -2,7 +2,7 @@
 using System.Resources;
 using Cafe_App.Localizations;
 
-namespace Cafe_App.Models.CustomValidationAttrubites
+namespace Cafe_App.Attributes.CustomValidationAttrubites
 {
     public class IsUrlAttribute : ValidationAttribute
     {

@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace Cafe_App.Controllers.AuthAttributes
+namespace Cafe_App.Attributes.AuthAttributes
 {
     public class IsAuthenticatedAttribute : ActionFilterAttribute
     {

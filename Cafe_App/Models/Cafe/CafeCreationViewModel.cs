@@ -1,5 +1,5 @@
 using System.ComponentModel.DataAnnotations;
-using Cafe_App.Models.CustomValidationAttrubites;
+using Cafe_App.Attributes.CustomValidationAttrubites;
 
 namespace Cafe_App.Models.Cafe;
 
