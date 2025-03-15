@@ -5,7 +5,7 @@ namespace Cafe_App.Models.Cafe;
 
 public class CafeCreationViewModel
 { 
-    //[UniqTitle]
+    [UniqTitle]
     public string Title { get; set; }
     
     /*[IsUrl(

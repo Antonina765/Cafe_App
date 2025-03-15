@@ -82,12 +82,12 @@ public class CafeController : Controller
             return Unauthorized("Только администраторы могут создавать новое кафе.");
         }
         
-        /*if (_cafeRepository.HasSimilarTitles(viewModel.Title))
+        if (_cafeRepository.HasSimilarTitles(viewModel.Title))
         {
             ModelState.AddModelError(
                 nameof(CafeCreationViewModel.Title),
                 "Слишком похожее название");
-        }*/
+        }
 
         // Если ни файл не выбран, ни указан URL, добавляем ошибку модели
         if ((file == null || file.Length == 0) && string.IsNullOrWhiteSpace(viewModel.ImageSrc))
@@ -124,7 +124,7 @@ public class CafeController : Controller
             }
 
             // Сохраняем относительный путь, который будет храниться в базе
-            imagePath = $"/images/cafes/{fileName}";
+            imagePath = $"/images/cafes/posts/{fileName}";
         }
         else
         {
@@ -171,6 +171,10 @@ public class CafeController : Controller
     [HttpPost]
     public IActionResult UpdateAvatar(IFormFile avatar)
     {
+        if(avatar == null || avatar.Length == 0)
+        {
+            return RedirectToAction("Profile");
+        }
         var webRootPath = _webHostEnvironment.WebRootPath;
 
         var userId = _authService.GetUserId()!.Value;

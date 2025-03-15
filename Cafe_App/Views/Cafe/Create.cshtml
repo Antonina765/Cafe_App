@@ -25,7 +25,7 @@
     </div>
     <div>
         <label for ="imageFile">Upload Image</label>
-        <input type="file" id = "imageFile" name ="ImageFile"  onchange="previewByFile()"/>
+        <input type="file" id = "file" name ="file"  onchange="previewByFile()" enctype="multipart/form-data" />
         @Html.ValidationMessageFor(x=> x.ImageFile)
     </div>
     <!-- Превью изображения -->
@@ -34,7 +34,7 @@
     </div>
     <div>
         <label for ="address">Address</label>
-        @Html.TextBoxFor(x => x.Address, new { placeholder = "Adress", id="address" })
+        @Html.TextBoxFor(x => x.Address, new { placeholder = "Address", id="address" })
         @Html.ValidationMessageFor(x => x.Address)
     </div>
     <div>

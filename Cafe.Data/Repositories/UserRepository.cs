@@ -54,7 +54,7 @@ public class UserRepository : BaseRepository<UserData>, IUserRepository<UserData
         {
             Login = login,
             Password = BrokePassword(password),
-            AvatarUrl = "/images/Ecology/defaltavatar.jpg",
+            AvatarUrl = "/images/avatars/avatar.png",
             Role = role,
             Language = Languages.Ru,
         };
@@ -62,22 +62,6 @@ public class UserRepository : BaseRepository<UserData>, IUserRepository<UserData
         _dbSet.Add(user);
         _webDbContext.SaveChanges();
     }
-   /* public void Register(string login, string password, string avatarUrl, Roles role = Roles.User)
-    {
-        var user = new UserData
-        {
-            Login = login,
-            Password = BrokePassword(password),
-            //Age = age,
-            //Coins = 100,
-            AvatarUrl = "/images/avatar/default.png",
-            Role = role,
-            Language = Language.En
-        };
-
-        _dbSet.Add(user);
-        _webDbContext.SaveChanges();
-    }*/
     
     public void UpdateAvatarUrl(int userId, string avatarUrl)
     {

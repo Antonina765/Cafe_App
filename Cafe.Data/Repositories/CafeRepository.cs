@@ -25,7 +25,7 @@ public class CafeRepository : BaseRepository<CafeData>, ICafeRepository<CafeData
 
     public bool HasSimilarTitles(string cafeTitle)
     {
-        return !_dbSet.Any(x => x.Title == cafeTitle);
+        return _dbSet.Any(x => x.Title == cafeTitle);
     }
     
     public void UpdateImage(int id, string url)

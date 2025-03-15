@@ -48,6 +48,7 @@
 
     <ItemGroup>
       <Folder Include="Attributes\" />
+      <Folder Include="wwwroot\images\cafes\posts\" />
     </ItemGroup>
 
 </Project>
