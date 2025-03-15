@@ -20,7 +20,8 @@ public class CafeRepository : BaseRepository<CafeData>, ICafeRepository<CafeData
             throw new UnauthorizedAccessException("Только администраторы могут добавлять данные.");
         }
         
-        return Add(cafeData);
+        var a = Add(cafeData);
+        return a;
     }
 
     public bool HasSimilarTitles(string cafeTitle)

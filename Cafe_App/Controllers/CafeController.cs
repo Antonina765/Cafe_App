@@ -75,7 +75,7 @@ public class CafeController : Controller
     }
 
     [HttpPost]
-    public IActionResult Create(CafeCreationViewModel viewModel, IFormFile file)
+    public IActionResult Create(CafeCreationViewModel viewModel)
     {
         if (!_authService.IsAdmin())
         {
@@ -90,7 +90,7 @@ public class CafeController : Controller
         }
 
         // Если ни файл не выбран, ни указан URL, добавляем ошибку модели
-        if ((file == null || file.Length == 0) && string.IsNullOrWhiteSpace(viewModel.ImageSrc))
+        if ((viewModel.ImageFile == null || viewModel.ImageFile.Length == 0) && string.IsNullOrWhiteSpace(viewModel.ImageSrc))
         {
             ModelState.AddModelError("Image",
                 "Необходимо предоставить изображение: либо загрузить файл, либо указать URL.");
@@ -103,7 +103,7 @@ public class CafeController : Controller
 
         // Если файл был загружен – приоритет отдается ему
         string imagePath = null;
-        if (file != null && file.Length > 0)
+        if (viewModel.ImageFile != null && viewModel.ImageFile.Length > 0)
         {
             var webRootPath = _webHostEnvironment.WebRootPath;
             var uploadsFolder = Path.Combine(webRootPath, "images", "cafes");
@@ -115,12 +115,12 @@ public class CafeController : Controller
             }
 
             // Генерируем уникальное имя файла
-            var fileName = $"{Guid.NewGuid()}_{Path.GetFileName(file.FileName)}";
+            var fileName = $"{Guid.NewGuid()}_{Path.GetFileName(viewModel.ImageFile.FileName)}";
             var fullPath = Path.Combine(uploadsFolder, fileName);
 
             using (var fileStream = new FileStream(fullPath, FileMode.Create))
             {
-                file.CopyTo(fileStream);
+                viewModel.ImageFile.CopyTo(fileStream);
             }
 
             // Сохраняем относительный путь, который будет храниться в базе

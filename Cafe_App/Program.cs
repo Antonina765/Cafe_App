@@ -5,6 +5,7 @@ using Cafe.Data.Interface.Repositories;
 using Cafe.Data.Models;
 using Cafe.Data.Repositories;
 using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
