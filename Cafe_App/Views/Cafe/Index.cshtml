@@ -10,12 +10,14 @@
 }
 
 @section Scripts {
+    <!-- Подключаем jQuery (если ещё не подключен) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="~/js/index.js"></script>
 }
 
 @foreach (var cafe in Model)
 {
-    <div class="cafe-container">
+    <div class="cafe-container" data-cafeid="@cafe.CafeId">
         <!-- информация о кафе -->
         <div class="cafes">
             <h2 class="cafe-title">@cafe.Title</h2>
@@ -33,8 +35,9 @@
         <div style="text-align: center;">
             @if (ViewBag.IsAdmin == true)
             {
-                <button onclick="updateCafeImage(@cafe.CafeId)" class="cafe-button cafe-button-update">Update Image</button>
-                <button onclick="updateCafeTitle(@cafe.CafeId)" class="cafe-button cafe-button-update-title">Update Title</button>
+                <button onclick="openUpdateTitleModal(@cafe.CafeId, '@cafe.Title')" class="cafe-button">Обновить название</button>
+                <button onclick="openUpdateImageModal(@cafe.CafeId)" class="cafe-button">Обновить картинку</button>
+            
                 <button onclick="deleteCafe(@cafe.CafeId)" class="cafe-button cafe-button-delete">Delete</button>
             }
             else
@@ -46,37 +49,41 @@
 }
 
 <!-- Модальное окно для обновления названия -->
-<div id="titleModal" class="modal">
+<div id="updateTitleModal" class="modal-overlay">
     <div class="modal-content">
-        <span class="modal-close" onclick="closeTitleModal()">×</span>
-        <h3>Update Cafe Title</h3>
-        <form id="titleForm" method="post" action="/Cafe/UpdateTitle">
-            <input type="hidden" id="titleCafeId" name="id" />
-            <input type="text" id="newTitle" name="newTitle" placeholder="Enter new title" style="width:100%; padding:8px; margin:8px 0;" />
-            <button type="submit" class="cafe-button">Save</button>
+        <h3>Обновить название</h3>
+        <form id="updateTitleForm">
+            <input type="hidden" id="titleCafeId" />
+            <div>
+                <label for="newTitle">Новое название:</label>
+                <input type="text" id="newTitle" name="newTitle" required />
+            </div>
+            <div>
+                <button type="submit">Обновить</button>
+                <button type="button" onclick="closeUpdateTitleModal()">Отмена</button>
+            </div>
         </form>
     </div>
 </div>
 
 <!-- Модальное окно для обновления картинки -->
-<div id="imageModal" class="modal">
+<div id="updateImageModal" class="modal-overlay">
     <div class="modal-content">
-        <span class="modal-close" onclick="closeImageModal()">×</span>
-        <h3>Update Cafe Image</h3>
-        <form id="imageForm" method="post" action="/Cafe/UpdateImage" enctype="multipart/form-data">
-            <input type="hidden" id="imageCafeId" name="id" />
+        <h3>Обновить картинку</h3>
+        <form id="updateImageForm" enctype="multipart/form-data">
+            <input type="hidden" id="imageCafeId" />
             <div>
-                <label for="imageFile">Upload Image:</label>
-                <input type="file" id="imageFile" name="imageFile" accept="image/*" style="margin:8px 0;" />
+                <label for="imageFile">Загрузить файл:</label>
+                <input type="file" id="imageFile" name="imageFile" accept="image/*" />
             </div>
             <div>
-                <label for="imageUrl">or Enter URL:</label>
-                <input type="text" id="imageUrl" name="url" placeholder="Image URL" style="width:100%; padding:8px; margin:8px 0;" />
+                <label for="imageUrl">или URL:</label>
+                <input type="text" id="imageUrl" name="url" />
             </div>
-            <button type="submit" class="cafe-button">Save</button>
+            <div>
+                <button type="submit">Обновить</button>
+                <button type="button" onclick="closeUpdateImageModal()">Отмена</button>
+            </div>
         </form>
     </div>
 </div>
-
-<!-- Подключение файла скриптов -->
-<script src="~/js/cafe.js"></script>

@@ -199,22 +199,23 @@ public class CafeController : Controller
     }
     
     [IsAdmin]
-    public bool UpdateTitle(string newTitle, int id)
+    [HttpPost]
+    public IActionResult UpdateTitle(string newTitle, int id)
     {
         if (string.IsNullOrWhiteSpace(newTitle))
         {
-            return false;
+            return BadRequest("Title cannot be empty.");
         }
         
         Thread.Sleep(5 * 1000);
 
         if (newTitle.Contains("boris"))
         {
-            return false;
+            return BadRequest("Title cannot contain boris.");
         }
 
         _cafeRepository.UpdateTitle(id, newTitle);
-        return true;
+        return Ok();
     }
 
     [IsAdmin]
@@ -255,12 +256,12 @@ public class CafeController : Controller
         else
         {
             ModelState.AddModelError("Image", "Необходимо предоставить изображение: либо загрузить файл, либо указать URL.");
-            // Здесь можно вернуть представление с моделью ошибок или выполнить редирект, в зависимости от вашей логики
-            return RedirectToAction("Index");
+            
+            return BadRequest("Image cannot be empty.");
         }
 
         _cafeRepository.UpdateImage(id, imagePath);
-        return RedirectToAction("Index");
+        return Ok();
     }
     
     [IsAdmin]
