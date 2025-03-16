@@ -44,5 +44,239 @@ namespace Cafe_App.Localizations {
                 resourceCulture = value;
             }
         }
+        
+        internal static string ValidationMessage_UploadFile {
+            get {
+                return ResourceManager.GetString("ValidationMessage_UploadFile", resourceCulture);
+            }
+        }
+        
+        internal static string Cafe_Cafes {
+            get {
+                return ResourceManager.GetString("Cafe_Cafes", resourceCulture);
+            }
+        }
+        
+        internal static string Cafe_Chat {
+            get {
+                return ResourceManager.GetString("Cafe_Chat", resourceCulture);
+            }
+        }
+        
+        internal static string Language {
+            get {
+                return ResourceManager.GetString("Language", resourceCulture);
+            }
+        }
+        
+        internal static string Profile {
+            get {
+                return ResourceManager.GetString("Profile", resourceCulture);
+            }
+        }
+        
+        internal static string English {
+            get {
+                return ResourceManager.GetString("English", resourceCulture);
+            }
+        }
+        
+        internal static string Russian {
+            get {
+                return ResourceManager.GetString("Russian", resourceCulture);
+            }
+        }
+        
+        internal static string Welcome {
+            get {
+                return ResourceManager.GetString("Welcome", resourceCulture);
+            }
+        }
+        
+        internal static string Login {
+            get {
+                return ResourceManager.GetString("Login", resourceCulture);
+            }
+        }
+        
+        internal static string Registration {
+            get {
+                return ResourceManager.GetString("Registration", resourceCulture);
+            }
+        }
+        
+        internal static string Exit {
+            get {
+                return ResourceManager.GetString("Exit", resourceCulture);
+            }
+        }
+        
+        internal static string Create_cafe {
+            get {
+                return ResourceManager.GetString("Create_cafe", resourceCulture);
+            }
+        }
+        
+        internal static string Light_mode {
+            get {
+                return ResourceManager.GetString("Light_mode", resourceCulture);
+            }
+        }
+        
+        internal static string Dark_mode {
+            get {
+                return ResourceManager.GetString("Dark_mode", resourceCulture);
+            }
+        }
+        
+        internal static string Update_avatar {
+            get {
+                return ResourceManager.GetString("Update_avatar", resourceCulture);
+            }
+        }
+        
+        internal static string Avatar {
+            get {
+                return ResourceManager.GetString("Avatar", resourceCulture);
+            }
+        }
+        
+        internal static string Update_Title {
+            get {
+                return ResourceManager.GetString("Update_Title", resourceCulture);
+            }
+        }
+        
+        internal static string Update_Image {
+            get {
+                return ResourceManager.GetString("Update_Image", resourceCulture);
+            }
+        }
+        
+        internal static string Delete {
+            get {
+                return ResourceManager.GetString("Delete", resourceCulture);
+            }
+        }
+        
+        internal static string More_Info {
+            get {
+                return ResourceManager.GetString("More_Info", resourceCulture);
+            }
+        }
+        
+        internal static string New_Title {
+            get {
+                return ResourceManager.GetString("New_Title", resourceCulture);
+            }
+        }
+        
+        internal static string Update {
+            get {
+                return ResourceManager.GetString("Update", resourceCulture);
+            }
+        }
+        
+        internal static string Cancel {
+            get {
+                return ResourceManager.GetString("Cancel", resourceCulture);
+            }
+        }
+        
+        internal static string Upload {
+            get {
+                return ResourceManager.GetString("Upload", resourceCulture);
+            }
+        }
+        
+        internal static string Url {
+            get {
+                return ResourceManager.GetString("Url", resourceCulture);
+            }
+        }
+        
+        internal static string Rating {
+            get {
+                return ResourceManager.GetString("Rating", resourceCulture);
+            }
+        }
+        
+        internal static string Title {
+            get {
+                return ResourceManager.GetString("Title", resourceCulture);
+            }
+        }
+        
+        internal static string Image_Url {
+            get {
+                return ResourceManager.GetString("Image_Url", resourceCulture);
+            }
+        }
+        
+        internal static string Upload_Image {
+            get {
+                return ResourceManager.GetString("Upload_Image", resourceCulture);
+            }
+        }
+        
+        internal static string No {
+            get {
+                return ResourceManager.GetString("No", resourceCulture);
+            }
+        }
+        
+        internal static string Address {
+            get {
+                return ResourceManager.GetString("Address", resourceCulture);
+            }
+        }
+        
+        internal static string Create {
+            get {
+                return ResourceManager.GetString("Create", resourceCulture);
+            }
+        }
+        
+        internal static string Send {
+            get {
+                return ResourceManager.GetString("Send", resourceCulture);
+            }
+        }
+        
+        internal static string Do_fun {
+            get {
+                return ResourceManager.GetString("Do_fun", resourceCulture);
+            }
+        }
+        
+        internal static string Fact {
+            get {
+                return ResourceManager.GetString("Fact", resourceCulture);
+            }
+        }
+        
+        internal static string Users {
+            get {
+                return ResourceManager.GetString("Users", resourceCulture);
+            }
+        }
+        
+        internal static string Update_role {
+            get {
+                return ResourceManager.GetString("Update_role", resourceCulture);
+            }
+        }
+        
+        internal static string Authorisation {
+            get {
+                return ResourceManager.GetString("Authorisation", resourceCulture);
+            }
+        }
+        
+        internal static string Cafe_app {
+            get {
+                return ResourceManager.GetString("Cafe_app", resourceCulture);
+            }
+        }
     }
 }

@@ -1,3 +1,4 @@
+@using Cafe_App.Localizations
 @using Cafe_App.Services
 @model IEnumerable<Cafe_App.Models.Cafe.CafeIndexViewModel>
 
@@ -29,20 +30,20 @@
                     <span>★</span>
                 }
             </div>
-            <p class="cafe-rating">Rating: @cafe.Rang</p>
+            <p class="cafe-rating">@Cafe.Rating @cafe.Rang</p>
         </div>
 
         <div style="text-align: center;">
             @if (ViewBag.IsAdmin == true)
             {
-                <button onclick="openUpdateTitleModal(@cafe.CafeId, '@cafe.Title')" class="cafe-button">Обновить название</button>
-                <button onclick="openUpdateImageModal(@cafe.CafeId)" class="cafe-button">Обновить картинку</button>
+                <button onclick="openUpdateTitleModal(@cafe.CafeId, '@cafe.Title')" class="cafe-button">@Cafe.Update_Title</button>
+                <button onclick="openUpdateImageModal(@cafe.CafeId)" class="cafe-button">@Cafe.Update_Image</button>
             
-                <button onclick="deleteCafe(@cafe.CafeId)" class="cafe-button cafe-button-delete">Delete</button>
+                <button onclick="deleteCafe(@cafe.CafeId)" class="cafe-button cafe-button-delete">@Cafe.Delete</button>
             }
             else
             {
-                <button onclick="moreInfo(@cafe.CafeId)" class="cafe-button cafe-button-more">More Information</button>
+                <button onclick="moreInfo(@cafe.CafeId)" class="cafe-button cafe-button-more">@Cafe.More_Info</button>
             }
         </div>
     </div>
@@ -51,16 +52,16 @@
 <!-- Модальное окно для обновления названия -->
 <div id="updateTitleModal" class="modal-overlay">
     <div class="modal-content">
-        <h3>Обновить название</h3>
+        <h3>@Cafe.Update_Title</h3>
         <form id="updateTitleForm">
             <input type="hidden" id="titleCafeId" />
             <div>
-                <label for="newTitle">Новое название:</label>
+                <label for="newTitle">@Cafe.New_Title</label>
                 <input type="text" id="newTitle" name="newTitle" required />
             </div>
             <div>
-                <button type="submit">Обновить</button>
-                <button type="button" onclick="closeUpdateTitleModal()">Отмена</button>
+                <button type="submit">@Cafe.Update</button>
+                <button type="button" onclick="closeUpdateTitleModal()">@Cafe.Cancel</button>
             </div>
         </form>
     </div>
@@ -69,20 +70,20 @@
 <!-- Модальное окно для обновления картинки -->
 <div id="updateImageModal" class="modal-overlay">
     <div class="modal-content">
-        <h3>Обновить картинку</h3>
+        <h3>@Cafe.Update_Image</h3>
         <form id="updateImageForm" enctype="multipart/form-data">
             <input type="hidden" id="imageCafeId" />
             <div>
-                <label for="imageFile">Загрузить файл:</label>
+                <label for="imageFile">@Cafe.Upload</label>
                 <input type="file" id="imageFile" name="imageFile" accept="image/*" />
             </div>
             <div>
-                <label for="imageUrl">или URL:</label>
+                <label for="imageUrl">@Cafe.Url</label>
                 <input type="text" id="imageUrl" name="url" />
             </div>
             <div>
-                <button type="submit">Обновить</button>
-                <button type="button" onclick="closeUpdateImageModal()">Отмена</button>
+                <button type="submit">@Cafe.Update</button>
+                <button type="button" onclick="closeUpdateImageModal()">@Cafe.Cancel</button>
             </div>
         </form>
     </div>

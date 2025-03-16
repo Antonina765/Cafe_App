@@ -1,3 +1,4 @@
+@using Cafe_App.Localizations
 @model Cafe_App.Models.Cafe.CafeCreationViewModel
 
 @{
@@ -15,34 +16,34 @@
 <!-- enctype указан в теге form -->
 <form method="post" enctype="multipart/form-data">
     <div>
-        <label for="title">Title</label>
+        <label for="title">@Cafe.Title</label>
         @Html.TextBoxFor(x => x.Title, new { placeholder = "Enter title", id ="title" })
         @Html.ValidationMessageFor(x => x.Title)
     </div>
     <div>
-        <label for="imageSrc">Image URL</label>
+        <label for="imageSrc">@Cafe.Image_Url</label>
         @Html.TextBoxFor(x => x.ImageSrc, new { placeholder = "Enter a way to picture", id ="imageSrc", oninput = "previewByUrl()" })
         @Html.ValidationMessageFor(x => x.ImageSrc)
     </div>
     <div>
-        <label for="imageFile">Upload Image</label>
+        <label for="imageFile">@Cafe.Upload_Image</label>
         <!-- Изменено имя поля -->
         <input type="file" id="file" name="ImageFile" onchange="previewByFile()" />
         @Html.ValidationMessageFor(x => x.ImageFile)
     </div>
     <!-- Превью изображения -->
     <div id="imagePreview" style="margin-top: 20px;">
-        <p>No image selected.</p>
+        <p>@Cafe.No</p>
     </div>
     <div>
-        <label for="address">Address</label>
+        <label for="address">@Cafe.Address</label>
         @Html.TextBoxFor(x => x.Address, new { placeholder = "Address", id="address" })
         @Html.ValidationMessageFor(x => x.Address)
     </div>
     <div>
-        <label for="rang">Rang</label>
+        <label for="rang">@Cafe.Rating</label>
         @Html.TextBoxFor(x => x.Rang, new { placeholder = "Rang", @type = "number", id="rang" })
         @Html.ValidationMessageFor(x => x.Rang)
     </div>
-    <button type="submit">Create</button>
+    <button type="submit">@Cafe.Create</button>
 </form>

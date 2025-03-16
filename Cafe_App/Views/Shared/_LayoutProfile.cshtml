@@ -1,3 +1,4 @@
+@using Cafe_App.Localizations
 @using Cafe_App.Models.Cafe
 @model ProfileViewModel
 @using Cafe_App.Services
@@ -16,7 +17,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Profile</title>
+    <title>@Cafe.Profile</title>
     <!-- Сброс стилей -->
     <link href="~/css/cafe/reset.css" rel="stylesheet" />
     <!-- Основной файл стилей, который можно переключать через JS -->
@@ -43,35 +44,35 @@
     <div class="logo">
         <img src="~/images/cafes/logotype.png" alt="logo" />
     </div>
-    <div>Welcome @(string.IsNullOrEmpty(Model.UserName) ? "Guest" : Model.UserName)</div>
+    <div>@Cafe.Welcome @(string.IsNullOrEmpty(Model.UserName) ? "Guest" : Model.UserName)</div>
     <div class="reg-auth">
         <ul class="navbar-nav flex-grow-1">
             @if (!User.Identity?.IsAuthenticated ?? false)
             {
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Auth" asp-action="Login">Login</a>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Auth" asp-action="Login">@Cafe.Login</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Auth" asp-action="Register">Registration</a>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Auth" asp-action="Register">@Cafe.Registration</a>
                 </li>
             }
             else
             {
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Auth" asp-action="Logout">Exit</a>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Auth" asp-action="Logout">@Cafe.Exit</a>
                 </li>
             }
             @if (authService.IsAdmin())
             {
                 <li class="nav-item">
-                    <a class="nav-link text-dark" href="/Cafe/Create">Create cafe</a>
+                    <a class="nav-link text-dark" href="/Cafe/Create">@Cafe.Create_cafe</a>
                 </li>
             }
         </ul>
     </div>
     <div>
-        <button class="theme-toggle" data-theme="light">Light Mode</button>
-        <button class="theme-toggle" data-theme="dark">Dark Mode</button>
+        <button class="theme-toggle" data-theme="light">@Cafe.Light_mode</button>
+        <button class="theme-toggle" data-theme="dark">@Cafe.Dark_mode</button>
     </div>
     <div class="return-home">
         <ul>

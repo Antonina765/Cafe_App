@@ -1,3 +1,4 @@
+@using Cafe_App.Localizations
 @model Cafe_App.Models.Cafe.ProfileViewModel
 
 @{
@@ -9,14 +10,14 @@
         <h1>@Model.UserName</h1>
     </div>
 
-    <div>Avatar:</div>
+    <div>@Cafe.Avatar</div>
     <div class="avatar-image">
         <img class="avatar" src="@Model.AvatarUrl" style="max-height: 100px" />
     </div>
     <div>
         <form action="/Cafe/UpdateAvatar" method="post" enctype="multipart/form-data">
             <input type="file" name="avatar" />
-            <button type="submit">Update avatar</button>
+            <button type="submit">@Cafe.Update_avatar</button>
         </form>
     </div>
 </div>

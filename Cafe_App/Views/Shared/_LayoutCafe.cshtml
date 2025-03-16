@@ -1,9 +1,10 @@
+@using Cafe_App.Localizations
 @using Cafe_App.Services
 @inject UserService userService
 <!DOCTYPE html>
 <html>
 <head>
-    <title> Cafe app </title>
+    <title>@Cafe.Cafe_app </title>
     <link href="~/css/cafe/style.css" rel="stylesheet" />
     <link href="~/css/cafe/button.css" rel="stylesheet" />
     
@@ -18,10 +19,10 @@
         <div class="logotip">
             <img src="~/images/cafes/logotype.png" alt="logotype" />
         </div>
-        <div class="name">Cafes</div>
+        <div class="name">@Cafe.Cafe_Cafes</div>
         <div class="block-of-profile">
             <img src="@userService.GetAvatar()" alt="avatar" class="avatar" />
-            <li><a class="log-sing" href="/Cafe/Profile">Profile</a></li>
+            <li><a class="log-sing" href="/Cafe/Profile">@Cafe.Profile</a></li>
         </div>
     </header>
 
@@ -29,15 +30,15 @@
     <div class="menu-bar">
         <nav class="menu-list">
             <ul>
-                <li class="menu-item"><a href="/Cafe/Index">Cafes</a></li>
-                <li class="menu-item"><a href="/Cafe/Chat">Chat</a></li>
+                <li class="menu-item"><a href="/Cafe/Index">@Cafe.Cafe_Cafes</a></li>
+                <li class="menu-item"><a href="/Cafe/Chat">@Cafe.Cafe_Chat</a></li>
             </ul>
                 <!-- Новый элемент меню для смены языка -->
             <div class="menu-item dropdown">
-                <button class="dropbtn">Язык</button>
+                <button class="dropbtn">@Cafe.Language</button>
                 <div class="dropdown-content">
-                    <a href="/Cafe/UpdateLocale?language=En">English</a>
-                    <a href="/Cafe/UpdateLocale?language=Ru">Русский</a>
+                    <a href="/Cafe/UpdateLocale?language=En">@Cafe.English</a>
+                    <a href="/Cafe/UpdateLocale?language=Ru">@Cafe.Russian</a>
                 </div>
                 </div>
         </nav>

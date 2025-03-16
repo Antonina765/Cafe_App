@@ -1,8 +1,9 @@
-﻿@using Cafe_App.Models.Admin
+﻿@using Cafe_App.Localizations
+@using Cafe_App.Models.Admin
 @model AdminUserViewModel
 
 <div class="users">
-    <h1>Users</h1>
+    <h1>@Cafe.Users</h1>
     @foreach (var user in Model.Users)
     {
         <div>
@@ -23,11 +24,11 @@
                             <input name="role" type="checkbox" value="@role.Value" />
                         </label>
                     }
-                    <button>Обновить роль</button>
+                    <button>@Cafe.Update_role</button>
                 </span>
             </form>
         
-            <a class="delete-user" href="/admin/DeleteUser?id=@user.Id" data-username="@user.Name">delete</a>
+            <a class="delete-user" href="/admin/DeleteUser?id=@user.Id" data-username="@user.Name">@Cafe.Delete</a>
         </div>
     }
 </div>
