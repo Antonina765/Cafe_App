@@ -14,31 +14,40 @@
     <link rel="stylesheet" href="~/css/chat.css" />
 }
 
-<div class="main-page">
-    <div class="chat-container">
+<!-- Основной контейнер с двумя колонками -->
+<div class="container">
+    <!-- Левая колонка: чат -->
+    <div class="chat-section">
+        <!-- Скрытые данные пользователя -->
         <input type="hidden" class="user-id" value="@Model.UserId" />
         <input type="hidden" class="user-name" value="@Model.UserName" />
-        <div class="messages">
-            <div class="message template">***</div>
+
+        <!-- Область сообщений -->
+        <div class="chat-messages">
+            <div class="messages">
+                <div class="message template">***</div>
+                @* Здесь будут добавляться сообщения *@
+            </div>
         </div>
-        <div>
-            <input class="new-message" />
+
+        <!-- Поле ввода нового сообщения -->
+        <div class="chat-input">
+            <input class="new-message" placeholder="Введите сообщение..." />
             <button class="send-new-message" type="button">@Cafe.Send</button>
         </div>
-        <div class="joke">
-            <button>@Cafe.Do_fun</button>
+
+        <!-- Кнопка для дополнительного действия (например, шутка) -->
+        <div class="chat-fun">
+            <button type="button">@Cafe.Do_fun</button>
         </div>
     </div>
-    
-</div>
-<div>
-    <div>
-        @Cafe.Fact @Model.TheNumber
-        <div>
-            @Model.FactAboutNumber
+
+    <!-- Правая колонка: изображение собаки и факт -->
+    <div class="dog-section">
+        <img src="@Model.DogImageSrc" alt="Dog Image" />
+        <div class="fact">
+            <strong>@Cafe.Fact @Model.TheNumber</strong>
+            <div>@Model.FactAboutNumber</div>
         </div>
-    </div>
-    <div>
-        <img src="@Model.DogImageSrc" />
     </div>
 </div>

@@ -1,3 +1,64 @@
 .template{
     display: none;
 }
+
+/* Основной контейнер - два столбца */
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+/* Левая колонка: чат */
+.chat-section {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ccc;
+    padding: 10px;
+    height: 600px; /* можно задать фиксированную высоту или использовать другой подход */
+}
+
+/* Область для отображения сообщений */
+.chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+/* Область ввода нового сообщения */
+.chat-input {
+    display: flex;
+    gap: 10px;
+}
+.chat-input input.new-message {
+    flex: 1;
+    padding: 5px;
+}
+.chat-input button.send-new-message {
+    padding: 5px 10px;
+}
+
+/* Опционально, блок для кнопки «Do fun» */
+.chat-fun {
+    margin-top: 10px;
+    text-align: right;
+}
+
+/* Правая колонка: собака и факт */
+.dog-section {
+    flex: 1;
+    text-align: right;
+}
+.dog-section img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin-bottom: 10px;
+}
+.fact {
+    text-align: left;
+}
