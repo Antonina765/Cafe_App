@@ -25,13 +25,17 @@ public class CafeController : Controller
         IUserRepository<UserData> userRepository,
         AuthService authService,
         IWebHostEnvironment webHostEnvironment,
-        AutoMapperCafe cafeMapper)
+        AutoMapperCafe cafeMapper,  
+        HttpNumberApi httpNumberApi,
+        HttpWoofApi httpWoofApi)
     {
         _cafeRepository = cafeRepository;
         _userRepository = userRepository;
         _authService = authService;
         _webHostEnvironment = webHostEnvironment;
         _cafeMapper = cafeMapper;
+        _httpNumberApi = httpNumberApi;
+        _httpWoofApi = httpWoofApi;
     }
 
     public IActionResult Index()
@@ -61,15 +65,12 @@ public class CafeController : Controller
             )
             .ToList();
         
-        
-        
         return View(cafesViewModels);
         
     }
 
     private void GenerateDefaultCafe()
     {
-        
     }
 
     [HttpGet]

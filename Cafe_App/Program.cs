@@ -1,6 +1,7 @@
 using Cafe_App.CustomMiddlewares;
 using Cafe_App.Hubs;
 using Cafe_App.Services;
+using Cafe_App.Services.Apis;
 using Cafe.Data;
 using Cafe.Data.Interface.Repositories;
 using Cafe.Data.Models;
@@ -39,6 +40,16 @@ builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<EnumHelper>();
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<IChatMessageRepository, ChatMessageRepository>();
+
+builder.Services.AddHttpClient<HttpNumberApi>(httpClient =>
+    httpClient.BaseAddress = new Uri("http://numbersapi.com/")
+);
+builder.Services.AddHttpClient<HttpWoofApi>(httpClient =>
+    httpClient.BaseAddress = new Uri("https://random.dog/")
+);
+builder.Services.AddHttpClient<HttpJokeApi>(httpClient =>
+    httpClient.BaseAddress = new Uri("https://official-joke-api.appspot.com/random_joke")
+);
 
 registrationHelper.AutoRegisterServiceByAttribute(builder.Services);
 registrationHelper.AutoRegisterServiceByAttributeOnConstructor(builder.Services);
