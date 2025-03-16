@@ -9,6 +9,10 @@
     <link href="~/css/cafe/index.css" rel="stylesheet"/>
 }
 
+@section Scripts {
+    <script src="~/js/index.js"></script>
+}
+
 @foreach (var cafe in Model)
 {
     <div class="cafe-container">
@@ -25,16 +29,54 @@
             </div>
             <p class="cafe-rating">Rating: @cafe.Rang</p>
         </div>
-        
+
         <div style="text-align: center;">
-            @if (cafe.CanDelete)
+            @if (ViewBag.IsAdmin == true)
             {
+                <button onclick="updateCafeImage(@cafe.CafeId)" class="cafe-button cafe-button-update">Update Image</button>
+                <button onclick="updateCafeTitle(@cafe.CafeId)" class="cafe-button cafe-button-update-title">Update Title</button>
                 <button onclick="deleteCafe(@cafe.CafeId)" class="cafe-button cafe-button-delete">Delete</button>
             }
             else
             {
-                <button onclick="moreInfo(@cafe.CafeId)" class="cafe-button cafe-button-more">Information</button>
+                <button onclick="moreInfo(@cafe.CafeId)" class="cafe-button cafe-button-more">More Information</button>
             }
         </div>
     </div>
 }
+
+<!-- Модальное окно для обновления названия -->
+<div id="titleModal" class="modal">
+    <div class="modal-content">
+        <span class="modal-close" onclick="closeTitleModal()">×</span>
+        <h3>Update Cafe Title</h3>
+        <form id="titleForm" method="post" action="/Cafe/UpdateTitle">
+            <input type="hidden" id="titleCafeId" name="id" />
+            <input type="text" id="newTitle" name="newTitle" placeholder="Enter new title" style="width:100%; padding:8px; margin:8px 0;" />
+            <button type="submit" class="cafe-button">Save</button>
+        </form>
+    </div>
+</div>
+
+<!-- Модальное окно для обновления картинки -->
+<div id="imageModal" class="modal">
+    <div class="modal-content">
+        <span class="modal-close" onclick="closeImageModal()">×</span>
+        <h3>Update Cafe Image</h3>
+        <form id="imageForm" method="post" action="/Cafe/UpdateImage" enctype="multipart/form-data">
+            <input type="hidden" id="imageCafeId" name="id" />
+            <div>
+                <label for="imageFile">Upload Image:</label>
+                <input type="file" id="imageFile" name="imageFile" accept="image/*" style="margin:8px 0;" />
+            </div>
+            <div>
+                <label for="imageUrl">or Enter URL:</label>
+                <input type="text" id="imageUrl" name="url" placeholder="Image URL" style="width:100%; padding:8px; margin:8px 0;" />
+            </div>
+            <button type="submit" class="cafe-button">Save</button>
+        </form>
+    </div>
+</div>
+
+<!-- Подключение файла скриптов -->
+<script src="~/js/cafe.js"></script>

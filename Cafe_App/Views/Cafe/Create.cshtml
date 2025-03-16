@@ -12,7 +12,8 @@
     <script src="~/js/imagePreview.js"></script>
 }
 
-<form method="post">
+<!-- enctype указан в теге form -->
+<form method="post" enctype="multipart/form-data">
     <div>
         <label for="title">Title</label>
         @Html.TextBoxFor(x => x.Title, new { placeholder = "Enter title", id ="title" })
@@ -24,16 +25,17 @@
         @Html.ValidationMessageFor(x => x.ImageSrc)
     </div>
     <div>
-        <label for ="imageFile">Upload Image</label>
-        <input type="file" id = "file" name ="file"  onchange="previewByFile()" enctype="multipart/form-data" />
-        @Html.ValidationMessageFor(x=> x.ImageFile)
+        <label for="imageFile">Upload Image</label>
+        <!-- Изменено имя поля -->
+        <input type="file" id="file" name="ImageFile" onchange="previewByFile()" />
+        @Html.ValidationMessageFor(x => x.ImageFile)
     </div>
     <!-- Превью изображения -->
     <div id="imagePreview" style="margin-top: 20px;">
         <p>No image selected.</p>
     </div>
     <div>
-        <label for ="address">Address</label>
+        <label for="address">Address</label>
         @Html.TextBoxFor(x => x.Address, new { placeholder = "Address", id="address" })
         @Html.ValidationMessageFor(x => x.Address)
     </div>

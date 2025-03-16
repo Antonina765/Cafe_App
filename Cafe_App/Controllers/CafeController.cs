@@ -33,6 +33,9 @@ public class CafeController : Controller
 
     public IActionResult Index()
     {
+        var isAdmin = _authService.IsAdmin();
+        ViewBag.IsAdmin = isAdmin;
+        
         if (!_cafeRepository.Any())
         {
             GenerateDefaultCafe();
@@ -74,6 +77,7 @@ public class CafeController : Controller
         return View(viewModel);
     }
 
+    [IsAdmin]
     [HttpPost]
     public IActionResult Create(CafeCreationViewModel viewModel)
     {
@@ -106,7 +110,7 @@ public class CafeController : Controller
         if (viewModel.ImageFile != null && viewModel.ImageFile.Length > 0)
         {
             var webRootPath = _webHostEnvironment.WebRootPath;
-            var uploadsFolder = Path.Combine(webRootPath, "images", "cafes");
+            var uploadsFolder = Path.Combine(webRootPath, "images", "cafes", "posts");
 
             // Создаем директорию, если ее нет
             if (!Directory.Exists(uploadsFolder))
@@ -193,6 +197,79 @@ public class CafeController : Controller
 
         return RedirectToAction("Profile");
     }
+    
+    [IsAdmin]
+    public bool UpdateTitle(string newTitle, int id)
+    {
+        if (string.IsNullOrWhiteSpace(newTitle))
+        {
+            return false;
+        }
+        
+        Thread.Sleep(5 * 1000);
+
+        if (newTitle.Contains("boris"))
+        {
+            return false;
+        }
+
+        _cafeRepository.UpdateTitle(id, newTitle);
+        return true;
+    }
+
+    [IsAdmin]
+    [HttpPost]
+    public IActionResult UpdateImage(int id, IFormFile imageFile, string url)
+    {
+        string imagePath = null;
+
+        // Если файл был загружен – приоритет отдается ему
+        if (imageFile != null && imageFile.Length > 0)
+        {
+            var webRootPath = _webHostEnvironment.WebRootPath;
+            var uploadsFolder = Path.Combine(webRootPath, "images", "cafes", "posts");
+
+            // Создаем директорию, если ее нет
+            if (!Directory.Exists(uploadsFolder))
+            {
+                Directory.CreateDirectory(uploadsFolder);
+            }
+
+            // Генерируем уникальное имя файла
+            var fileName = $"{Guid.NewGuid()}_{Path.GetFileName(imageFile.FileName)}";
+            var fullPath = Path.Combine(uploadsFolder, fileName);
+
+            using (var fileStream = new FileStream(fullPath, FileMode.Create))
+            {
+                imageFile.CopyTo(fileStream);
+            }
+
+            // Сохраняем относительный путь, который будет храниться в базе
+            imagePath = $"/images/cafes/posts/{fileName}";
+        }
+        // Если файл не был передан, но указан URL
+        else if (!string.IsNullOrWhiteSpace(url))
+        {
+            imagePath = url;
+        }
+        else
+        {
+            ModelState.AddModelError("Image", "Необходимо предоставить изображение: либо загрузить файл, либо указать URL.");
+            // Здесь можно вернуть представление с моделью ошибок или выполнить редирект, в зависимости от вашей логики
+            return RedirectToAction("Index");
+        }
+
+        _cafeRepository.UpdateImage(id, imagePath);
+        return RedirectToAction("Index");
+    }
+    
+    [IsAdmin]
+    public bool Remove(int id)
+    {
+        _cafeRepository.Delete(id);
+        return true;
+    }
+    
     public IActionResult UpdateLocale(Languages language)
     {
         var userId = _authService.GetUserId()!.Value;

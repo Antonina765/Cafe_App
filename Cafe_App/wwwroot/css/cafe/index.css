@@ -98,7 +98,7 @@ body {
 
 /* Responsive Layout */
 .cafe-container {
-    width: calc(20% - 20px); /* 5 cafes per row with 10px margin */
+    width: calc(20% - 20px); /* 5 cafes per row with margin */
 }
 
 @media (max-width: 1200px) {
@@ -117,4 +117,43 @@ body {
     .cafe-container {
         width: calc(100% - 20px); /* 1 cafe per row */
     }
+}
+
+/* Стили для модальных окон */
+.modal {
+    display: none; /* По умолчанию скрыто */
+    position: fixed;
+    z-index: 1100; /* Поверх остальных элементов */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: var(--background);
+    margin: 10% auto;
+    padding: 20px;
+    border: 2px solid var(--secondary);
+    border-radius: 10px;
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+}
+
+.modal-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 28px;
+    font-weight: bold;
+    color: var(--text-color);
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.modal-close:hover {
+    color: var(--secondary);
 }
