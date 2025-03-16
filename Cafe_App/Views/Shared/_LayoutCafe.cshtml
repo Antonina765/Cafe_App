@@ -27,11 +27,19 @@
 
     <!-- Меню под шапкой, такой же ширины -->
     <div class="menu-bar">
-        <nav>
-            <ul class="menu-list">
+        <nav class="menu-list">
+            <ul>
                 <li class="menu-item"><a href="/Cafe/Index">Cafes</a></li>
                 <li class="menu-item"><a href="/Cafe/Chat">Chat</a></li>
             </ul>
+                <!-- Новый элемент меню для смены языка -->
+            <div class="menu-item dropdown">
+                <button class="dropbtn">Язык</button>
+                <div class="dropdown-content">
+                    <a href="/Cafe/UpdateLocale?language=En">English</a>
+                    <a href="/Cafe/UpdateLocale?language=Ru">Русский</a>
+                </div>
+                </div>
         </nav>
     </div>
 

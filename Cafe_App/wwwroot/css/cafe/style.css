@@ -106,3 +106,48 @@ header .logotip img {
     background-color: #ddd;
     color: #3E2723;
 }
+
+/* Контейнер выпадающего меню */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Кнопка выпадающего меню */
+.dropbtn {
+    background-color: transparent;
+    color: var(--text-color);
+    padding: 8px 12px;
+    border: none;
+    cursor: pointer;
+    font-size: inherit;
+}
+
+/* Содержимое выпадающего меню */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: var(--background);
+    min-width: 120px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+/* Стилизация ссылок внутри выпадающего меню */
+.dropdown-content a {
+    color: var(--text-color);
+    padding: 8px 12px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Отображение выпадающего меню при наведении курсора */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Эффект hover для ссылок */
+.dropdown-content a:hover {
+    background-color: var(--primary);
+    color: var(--text-color);
+}

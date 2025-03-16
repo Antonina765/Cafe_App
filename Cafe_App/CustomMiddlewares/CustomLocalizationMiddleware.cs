@@ -32,9 +32,9 @@ namespace Cafe_App.CustomMiddlewares
             }
 
             var langFromCookie = context.Request.Cookies["lang"];
-            if (langFromCookie != null)
+            if (!string.IsNullOrEmpty(langFromCookie) && 
+                Enum.TryParse<Languages>(langFromCookie, true, out var lang))
             {
-                var lang = Enum.Parse<Languages>(langFromCookie);
                 SwitchLanguage(lang);
                 await _next.Invoke(context);
                 return;
@@ -56,7 +56,10 @@ namespace Cafe_App.CustomMiddlewares
                     culture = new CultureInfo("en-US");
                     break;
                 default:
-                    throw new Exception("Unknown language");
+                    // Либо задайте язык по умолчанию, либо логируйте ситуацию
+                    culture = new CultureInfo("en-US");
+                    // Optionally, log the error here
+                    break;
             }
 
             SwitchLanguages(culture);
