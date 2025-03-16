@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    const baseUrl = `https://localhost:7292`;
+    const baseUrl = `https://localhost:5000`;
 
     const authorId = $(".user-id").val() - 0;
     const authorName = $(".user-name").val();
