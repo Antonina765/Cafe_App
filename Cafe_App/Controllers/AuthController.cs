@@ -1,112 +1,105 @@
-using System.Security.Claims;
-using Cafe_App.Models.Auth;
-using Cafe_App.Services;
-using Cafe.Data.Interface.Models;
-using Cafe.Data.Interface.Repositories;
+using Enums.Users;
 using Cafe.Data.Models;
+using Cafe.Data.Repositories;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.SignalR;
-using IWebHostEnvironment = Microsoft.AspNetCore.Hosting.IWebHostEnvironment;
+using System.Security.Claims;
+using Cafe_App.Models.Auth;
+using Cafe_App.Services;
+using Cafe_App.Hubs;
+using Cafe.Data.Interface.Repositories;
 
-namespace Cafe_App.Controllers;
-public class AuthController : Controller
-{ 
-    public IUserRepository<UserData> _userRepository;
-    private IWebHostEnvironment _webHostEnvironment;
-    
-    public AuthController(IUserRepository<UserData> userRepository, 
-        IWebHostEnvironment webHostEnvironment)
-    {
-        _userRepository = userRepository;
-        _webHostEnvironment = webHostEnvironment;
-    }
 
-    [HttpGet]
-    public IActionResult Login()
+namespace Cafe_App.Controllers
+{
+    public class AuthController : Controller
     {
-        return View();
-    }
+        public IUserRepository<UserData> _userRepository;
+        public IHubContext<ChatHub, IChatHub> _chatHub;
 
-    [HttpPost]
-    public IActionResult Login(LoginUserViewModel viewModel)
-    {
-        var user = _userRepository.Login(viewModel.UserName, viewModel.Password);
+        public AuthController(IUserRepository<UserData> userRepository, 
+            IHubContext<ChatHub, IChatHub> chatHub)
+        {
+            _userRepository = userRepository;
+            _chatHub = chatHub;
+        }
+
+        [HttpGet]
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Login(LoginUserViewModel viewModel)
+        {
+            var user = _userRepository.Login(viewModel.UserName, viewModel.Password);
             
-        if (user is null)
-        {
-            ModelState.AddModelError(
-                nameof(viewModel.UserName), 
-                "Не правильный логин или пароль");
+            if (user is null)
+            {
+                ModelState.AddModelError(
+                    nameof(viewModel.UserName), 
+                    "Не правильный логин или пароль");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return View(viewModel);
+            }
+
+            //Good user
+
+            var claims = new List<Claim>()
+            {
+                new Claim(AuthService.CLAIM_TYPE_ID, user.Id.ToString()),
+                new Claim(AuthService.CLAIM_TYPE_NAME, user.Login),
+                new Claim(AuthService.CLAIM_TYPE_ROLE, ((int)user.Role).ToString()),
+                new Claim (ClaimTypes.AuthenticationMethod, AuthService.AUTH_TYPE_KEY),
+            };
+
+            var identity = new ClaimsIdentity(claims, AuthService.AUTH_TYPE_KEY);
+
+            var principal = new ClaimsPrincipal(identity);
+
+            HttpContext
+                .SignInAsync(principal)
+                .Wait();
+
+            return RedirectToAction("Profile", "Cafe");
         }
 
-        if (!ModelState.IsValid)
+        [HttpGet]
+        public IActionResult Register()
         {
-            return View(viewModel);
+            return View();
         }
 
-        //Good user
-
-        var claims = new List<Claim>()
+        [HttpPost]
+        public IActionResult Register(RegisterUserViewModel viewModel)
         {
-            new Claim(AuthService.CLAIM_TYPE_ID, user.Id.ToString()),
-            new Claim(AuthService.CLAIM_TYPE_NAME, user.Login),
-            new Claim(AuthService.CLAIM_TYPE_ROLE, ((int)user.Role).ToString()),
-            new Claim (ClaimTypes.AuthenticationMethod, AuthService.AUTH_TYPE_KEY),
-        };
+            if (!_userRepository.CheckIsNameAvailable(viewModel.UserName))
+            {
+                return View(viewModel);
+            }
 
-        var identity = new ClaimsIdentity(claims, AuthService.AUTH_TYPE_KEY);
+            _userRepository.Register(
+                viewModel.UserName,
+                viewModel.Password);
 
-        var principal = new ClaimsPrincipal(identity);
+            _chatHub.Clients.All.NewMessageAdded($"Новый пользователь зарегестировался у нас на сайте. Его зовут {viewModel.UserName}");
 
-        HttpContext
-            .SignInAsync(principal)
-            .Wait();
-
-        return RedirectToAction("Profile", "Cafe");
-    }
-
-    [HttpGet]
-    public IActionResult Register()
-    {
-        return View();
-    }
-    
-    [HttpPost]
-    public IActionResult Register(RegisterUserViewModel viewModel)
-    {
-        if (!_userRepository.CheckIsNameAvailable(viewModel.UserName))
-        {
-            return View(viewModel);
+            return RedirectToAction("Login");
         }
-        
-        _userRepository.Register(
-            viewModel.UserName,
-            viewModel.Password);
 
-        //_chatHub.Clients.All.NewMessageAdded($"Новый пользователь зарегестировался у нас на сайте. Его зовут {viewModel.UserName}");
+        public IActionResult Logout()
+        {
+            HttpContext
+                .SignOutAsync()
+                .Wait();
 
-        return RedirectToAction("Login");
-    }
-    
-    [HttpPost] 
-    public IActionResult RegisterFromProfile(RegisterUserViewModel viewModel) 
-    { 
-        if (ModelState.IsValid) 
-        { 
-            ModelState.AddModelError("", "Registration failed. Please try again."); 
-        } 
-        // Assuming you redirect back to the profile page if there's an error.
-        return RedirectToAction("Profile", "Cafe"); 
-    }
-
-    public IActionResult Logout()
-    {
-        HttpContext
-            .SignOutAsync()
-            .Wait();
-
-        return RedirectToAction("Profile", "Cafe");
+            return RedirectToAction("Profile", "Cafe");
+        }
     }
 }

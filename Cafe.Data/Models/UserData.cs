@@ -11,5 +11,5 @@ public class UserData : BaseModel, IUser
         public string AvatarUrl { get; set; }
         public Languages Language { get; set; }
         public Roles Role { get; set; }
-        
+        public virtual List<ChatMessageData> ChatMessages { get; set;} = new();
 }

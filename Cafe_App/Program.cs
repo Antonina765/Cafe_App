@@ -1,4 +1,5 @@
 using Cafe_App.CustomMiddlewares;
+using Cafe_App.Hubs;
 using Cafe_App.Services;
 using Cafe.Data;
 using Cafe.Data.Interface.Repositories;
@@ -37,7 +38,7 @@ registrationHelper.AutoRegisterRepositories(builder.Services);
 builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<EnumHelper>();
 builder.Services.AddScoped<AuthService>();
-
+builder.Services.AddScoped<IChatMessageRepository, ChatMessageRepository>();
 
 registrationHelper.AutoRegisterServiceByAttribute(builder.Services);
 registrationHelper.AutoRegisterServiceByAttributeOnConstructor(builder.Services);
@@ -84,6 +85,8 @@ app.UseMiddleware<CustomLocalizationMiddleware>();
 app.UseMiddleware<CustomThemeMiddleware>();
 
 //app.MapStaticAssets();
+
+app.MapHub<ChatHub>("/hub/chatMainPage");
 
 app.MapControllerRoute(
         name: "default",

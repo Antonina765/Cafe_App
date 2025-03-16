@@ -11,6 +11,8 @@ public class WebDbContext : DbContext
     
     public DbSet<UserData> Users { get; set; }
     
+    public DbSet<ChatMessageData> ChatMessages { get; set; }
+    
     public WebDbContext(DbContextOptions<WebDbContext> contextOptions)
         : base(contextOptions) { }
 
@@ -19,6 +21,16 @@ public class WebDbContext : DbContext
         optionsBuilder.UseNpgsql(CONNECTION_STRING);
     }
 
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+
+        modelBuilder.Entity<UserData>()
+            .HasMany(x => x.ChatMessages)
+            .WithOne(x => x.User)
+            .OnDelete(DeleteBehavior.SetNull);
+
+    }
     /*protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);

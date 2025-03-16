@@ -7,6 +7,7 @@ using Cafe.Data.Interface.Repositories;
 using Cafe.Data.Models;
 using Enums.Users;
 using Microsoft.AspNetCore.Mvc;
+using Cafe_App.Services.Apis;
 
 namespace Cafe_App.Controllers;
 
@@ -17,6 +18,8 @@ public class CafeController : Controller
     private AuthService _authService;
     private IWebHostEnvironment _webHostEnvironment;
     private AutoMapperCafe _cafeMapper;
+    private HttpNumberApi _httpNumberApi;
+    private HttpWoofApi _httpWoofApi;
 
     public CafeController(ICafeRepository<CafeData> cafeRepository,
         IUserRepository<UserData> userRepository,
@@ -277,5 +280,28 @@ public class CafeController : Controller
         _userRepository.UpdateLocal(userId, language);
 
         return RedirectToAction("Index");
+    }
+    
+    public async Task<IActionResult> Chat()
+    {
+        var viewModel = new ChatViewModel();
+
+        var userName = _authService.GetName();
+        var userId = _authService.GetUserId();
+
+        viewModel.UserName = userName;
+        viewModel.UserId = userId ?? -1;
+
+        viewModel.TheNumber = DateTime.Now.Second;
+            
+        var taskforNumber = _httpNumberApi.GetFactAsync(viewModel.TheNumber);
+        var taskforDog = _httpWoofApi.GetRandomDogImage();
+
+        await Task.WhenAll(taskforNumber, taskforDog);
+
+        viewModel.FactAboutNumber = taskforDog.Result;
+        viewModel.DogImageSrc = taskforDog.Result;
+
+        return View(viewModel);
     }
 }

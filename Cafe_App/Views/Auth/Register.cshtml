@@ -1,6 +1,10 @@
 ﻿@using Cafe_App.Models.Auth
 @model RegisterUserViewModel
 
+@{
+    Layout ="~/Views/Shared/_LayoutAuth.cshtml";
+}
+
 <form method="post">
     <div>
         @Html.TextBoxFor(x => x.UserName, new { placeholder = "логин" })

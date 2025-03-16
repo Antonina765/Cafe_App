@@ -1,0 +1,44 @@
+@using Cafe_App.Localizations
+@using Cafe_App.Models.Cafe
+@model ChatViewModel
+
+@{
+    Layout ="~/Views/Shared/_LayoutCafe.cshtml";
+}
+
+@section Scripts {
+    <script src="~/js/chat.js"></script>
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/chat.css" />
+}
+
+<div class="main-page">
+    <div class="chat-container">
+        <input type="hidden" class="user-id" value="@Model.UserId" />
+        <input type="hidden" class="user-name" value="@Model.UserName" />
+        <div class="messages">
+            <div class="message template">***</div>
+        </div>
+        <div>
+            <input class="new-message" />
+            <button class="send-new-message" type="button">Отправить</button>
+        </div>
+        <div class="joke">
+            <button>Do fun</button>
+        </div>
+    </div>
+    
+</div>
+<div>
+    <div>
+        Интересный факт о числе @Model.TheNumber
+        <div>
+            @Model.FactAboutNumber
+        </div>
+    </div>
+    <div>
+        <img src="@Model.DogImageSrc" />
+    </div>
+</div>
