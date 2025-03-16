@@ -44,6 +44,7 @@
     <ItemGroup>
       <_ContentIncludedByDefault Remove="Views\Home\Index.cshtml" />
       <_ContentIncludedByDefault Remove="Views\Home\Privacy.cshtml" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\posts\cafes\6ab47bf7-10cb-4330-b093-81d66b09e21c_IMG_1004.PNG" />
     </ItemGroup>
 
     <ItemGroup>
