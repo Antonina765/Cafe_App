@@ -14,11 +14,12 @@ body {
     padding: 0;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     height: 100vh;
 }
 
 form {
+    top: 120px;
     background-color: var(--accent);
     border: 2px solid var(--primary);
     border-radius: 15px;
