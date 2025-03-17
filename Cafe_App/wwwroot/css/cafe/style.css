@@ -151,3 +151,8 @@ header .logotip img {
     background-color: var(--primary);
     color: var(--text-color);
 }
+
+main{
+    display: flex;
+    justify-content: center;
+}
