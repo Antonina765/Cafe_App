@@ -25,7 +25,7 @@ namespace Cafe.Data.Repositories
 
             var messageData = new ChatMessageData
             {
-                CreationTime = DateTime.Now,
+                CreationTime = DateTime.UtcNow,
                 Message = message,
                 User = !userId.HasValue
                     ? null

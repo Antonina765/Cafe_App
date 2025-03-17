@@ -4,11 +4,20 @@ $(document).ready(function () {
     const authorId = $(".user-id").val() - 0;
     const authorName = $(".user-name").val();
 
+    // Создание подключения к SignalR с автоматическим переподключением
     const hub = new signalR.HubConnectionBuilder()
-        .withUrl(baseUrl + "/hub/chat")
+        .withUrl(baseUrl + "/hub/chatMainPage")
+        .withAutomaticReconnect()  // Автопереподключение при разрыве соединения
         .build();
 
-    init();
+    // Логирование событий соединения
+    hub.onclose(() => console.warn("Соединение с хабом потеряно!"));
+    hub.onreconnecting(() => console.warn("Переподключение к SignalR..."));
+    hub.onreconnected(() => console.log("Соединение с SignalR восстановлено!"));
+
+    init(); // Инициализация чата
+
+    console.log("Чат загружен!");
 
     hub.on("newMessageAdded", createNewMessage);
 
@@ -16,32 +25,55 @@ $(document).ready(function () {
 
     $(".new-message").on("keyup", function (e) {
         if (e.which == 13) {
-            // 13 is a code of Enter key
             sendMessage();
         }
     });
 
-    function sendMessage() {
+    async function sendMessage() {
         const message = $(".new-message").val();
-        hub.invoke("addNewMessage", authorId, authorName, message);
-        $(".new-message").val("");
+        if (!message.trim()) return; // Игнорируем пустые сообщения
+
+        if (hub.state !== signalR.HubConnectionState.Connected) {
+            console.warn("⏳ Соединение не установлено, жду...");
+            try {
+                await hub.start(); // Пробуем подключиться перед отправкой
+                console.log("Соединение установлено!");
+            } catch (err) {
+                console.error("Ошибка подключения к SignalR:", err);
+                return;
+            }
+        }
+
+        hub.invoke("AddNewMessage", message)
+            .catch(err => console.error("Ошибка при отправке сообщения:", err));
+
+        $(".new-message").val(""); // Очищаем поле ввода после отправки
     }
 
-    hub.start().then(function () {
-        // When connection with server is alive
-        hub.invoke("userEnteredToChat", authorId, authorName);
-    });
+    async function startHubConnection() {
+        try {
+            await hub.start();
+            console.log("Connected to SignalR hub.");
+            hub.invoke("userEnteredToChat", authorId, authorName);
+        } catch (err) {
+            console.error("Ошибка подключения к SignalR:", err);
+            setTimeout(startHubConnection, 5000); // Пытаемся снова через 5 сек
+        }
+    }
 
-    //TODO refactor the method. Get data from new minimal api server
+    startHubConnection(); // Запускаем подключение
+
     function init() {
         const url = "/api/ApiChat/GetLastMessages";
-        $.get(url).then(function (messages) {
-            messages.forEach((message) => createNewMessage(message));
-        });
+        $.get(url)
+            .then(function (messages) {
+                messages.forEach((message) => createNewMessage(message));
+            })
+            .catch(err => console.error("Ошибка при загрузке сообщений:", err));
 
         setTimeout(() => {
             $(".joke").show();
-        }, 3 * 1000);
+        }, 3000);
     }
 
     function createNewMessage(message) {
