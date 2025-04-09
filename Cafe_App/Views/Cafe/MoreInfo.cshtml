@@ -1,0 +1,110 @@
+@using Cafe_App.Localizations
+@using Cafe_App.Services
+@model Cafe_App.Models.Cafe.CafeInfoViewModel
+
+@{
+    Layout = "~/Views/Shared/_LayoutCafe.cshtml";
+    // Заголовок страницы будет соответствовать названию ресторана
+    ViewBag.Title = Model.Title;
+}
+
+@section Styles {
+    <link href="~/css/cafe/cafeInfo.css" rel="stylesheet" />
+}
+
+@section Scripts {
+    <!-- Подключение jQuery и дополнительного JavaScript (если потребуется) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="~/js/cafeInfo.js"></script>
+}
+
+<div class="cafe-details-container">
+    <h1>@Model.Title</h1>
+
+    <div class="cafe-info">
+        <p><strong>Адрес:</strong> @Model.Address</p>
+        <p><strong>Описание:</strong> @Model.Description</p>
+    </div>
+
+    <hr />
+
+    @if (ViewBag.IsAdmin != null && ViewBag.IsAdmin == true)
+    {
+        <!-- Раздел для администратора -->
+        <div class="admin-panel">
+            <h2>Административная панель: обновление данных ресторана</h2>
+            <form id="adminForm" method="post" enctype="multipart/form-data" action="/Cafe/Update">
+                <!-- Идентификатор ресторана -->
+                <input type="hidden" name="CafeId" value="@Model.CafeId" />
+
+                <div class="form-group">
+                    <label for="MenuImage">Загрузить меню (файл):</label>
+                    <input type="file" id="MenuImage" name="MenuImage" accept=".pdf, .doc, .docx, .jpg, .png" />
+                </div>
+
+                <div class="form-group">
+                    <label for="CountOfTables">Количество столов:</label>
+                    <input type="number" id="CountOfTables" name="CountOfTables" value="@Model.CountOfTables" min="0" required />
+                </div>
+
+                <div class="form-group">
+                    <button type="submit">Сохранить изменения</button>
+                </div>
+            </form>
+        </div>
+    }
+    else
+    {
+        <!-- Раздел для обычного пользователя -->
+        <div class="user-view">
+            <h2>Меню ресторана</h2>
+            @if (Model.MenuImage != null)
+            {
+                <div class="menu-display">
+                    <!-- Вывод имени загруженного файла меню. Если у вас сохранён URL, можно заменить на тег <img> -->
+                    <p>Загруженное меню: @Model.MenuImage.FileName</p>
+                </div>
+            }
+            else
+            {
+                <p>Меню еще не загружено.</p>
+            }
+
+            @if (Model.AvailableTable && Model.CountOfTables > 0)
+            {
+                <!-- Кнопка для открытия модального окна бронирования -->
+                <button type="button" onclick="openBookingModal()" class="cafe-button">Забронировать столик</button>
+            }
+            else
+            {
+                <p>Столики недоступны для бронирования.</p>
+            }
+        </div>
+    }
+</div>
+
+<!-- Модальное окно для бронирования столика -->
+<div id="bookingModal" class="modal-overlay">
+    <div class="modal-content">
+        <span class="modal-close" onclick="closeBookingModal()">&times;</span>
+        <h2>Забронировать столик</h2>
+        <form id="bookingModalForm" method="post" action="/Booking/Reserve">
+            <!-- Передача идентификатора ресторана -->
+            <input type="hidden" name="CafeId" value="@Model.CafeId" />
+            
+            <div class="form-group">
+                <label for="bookingDate">Дата бронирования:</label>
+                <input type="date" id="bookingDate" name="bookingDate" required />
+            </div>
+            
+            <div class="form-group">
+                <label for="numGuests">Количество гостей:</label>
+                <input type="number" id="numGuests" name="numGuests" min="1" required />
+            </div>
+
+            <div class="form-group">
+                <button type="submit">Забронировать</button>
+            </div>
+        </form>
+    </div>
+</div>
