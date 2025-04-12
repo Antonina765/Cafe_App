@@ -1,5 +1,7 @@
 @using Cafe_App.Localizations
 @using Cafe_App.Services
+@using Enums.Users
+@using Microsoft.AspNetCore.Mvc.TagHelpers
 @inject UserService userService
 <!DOCTYPE html>
 <html>
@@ -35,19 +37,35 @@
                 <li class="menu-item"><a href="/Cafe/Index">@Cafe.Cafe_Cafes</a></li>
                 <li class="menu-item"><a href="/Cafe/Chat">@Cafe.Cafe_Chat</a></li>
             </ul>
+            @if (User.Identity?.IsAuthenticated ?? false)
+            {
                 <!-- Новый элемент меню для смены языка -->
-            <div class="menu-item dropdown">
-                <button class="dropbtn">@Cafe.Language</button>
-                <div class="dropdown-content">
-                    <a href="/Cafe/UpdateLocale?language=En">@Cafe.English</a>
-                    <a href="/Cafe/UpdateLocale?language=Ru">@Cafe.Russian</a>
+                <div class="menu-item dropdown">
+                    <button class="dropbtn">@Cafe.Language</button>
+                    <div class="dropdown-content">
+                        <a class="nav-link text-dark" href="/Cafe/UpdateLocale?language=@Languages.En">@Cafe.English</a>
+                        <a class="nav-link text-dark" href="/Cafe/UpdateLocale?language=@Languages.Ru">@Cafe.Russian</a>
+                    </div>
                 </div>
+            }
+            else
+            {
+                <!-- Новый элемент меню для смены языка -->
+                <div class="menu-item dropdown">
+                    <button class="dropbtn">@Cafe.Language</button>
+                    <div class="dropdown-content">
+                        <a class="nav-link text-dark unauth-lang" href="#" data-lang="@Languages.En">@Cafe.English</a>
+                        <a class="nav-link text-dark unauth-lang" href="#" data-lang="@Languages.Ru">@Cafe.Russian</a>
+                    </div>
                 </div>
+            }
         </nav>
     </div>
 
     <main>
         @RenderBody()
     </main>
+    <script src="~/js/cookie.js" asp-append-version="true"></script>
+    <script src="~/js/language.js" asp-append-version="true"></script>
 </body>
 </html>

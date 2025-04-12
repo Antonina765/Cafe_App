@@ -56,6 +56,7 @@ namespace Cafe_App.CustomMiddlewares
                     culture = new CultureInfo("en-US");
                     break;
                 default:
+                    //throw new Exception("Unknown languge");
                     // Либо задайте язык по умолчанию, либо логируйте ситуацию
                     culture = new CultureInfo("en-US");
                     // Optionally, log the error here
