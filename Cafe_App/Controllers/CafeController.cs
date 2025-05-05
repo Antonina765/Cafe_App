@@ -18,24 +18,18 @@ public class CafeController : Controller
     private AuthService _authService;
     private IWebHostEnvironment _webHostEnvironment;
     private AutoMapperCafe _cafeMapper;
-    private HttpNumberApi _httpNumberApi;
-    private HttpWoofApi _httpWoofApi;
 
     public CafeController(ICafeRepository<CafeData> cafeRepository,
         IUserRepository<UserData> userRepository,
         AuthService authService,
         IWebHostEnvironment webHostEnvironment,
-        AutoMapperCafe cafeMapper,  
-        HttpNumberApi httpNumberApi,
-        HttpWoofApi httpWoofApi)
+        AutoMapperCafe cafeMapper)
     {
         _cafeRepository = cafeRepository;
         _userRepository = userRepository;
         _authService = authService;
         _webHostEnvironment = webHostEnvironment;
         _cafeMapper = cafeMapper;
-        _httpNumberApi = httpNumberApi;
-        _httpWoofApi = httpWoofApi;
     }
 
     public IActionResult Index()
@@ -294,15 +288,7 @@ public class CafeController : Controller
         viewModel.UserId = userId ?? -1;
 
         viewModel.TheNumber = DateTime.Now.Second;
-            
-        var taskforNumber = _httpNumberApi.GetFactAsync(viewModel.TheNumber);
-        var taskforDog = _httpWoofApi.GetRandomDogImage();
-
-        await Task.WhenAll(taskforNumber, taskforDog);
-
-        viewModel.FactAboutNumber = taskforDog.Result;
-        viewModel.DogImageSrc = taskforDog.Result;
-
+        
         return View(viewModel);
     }
 }
