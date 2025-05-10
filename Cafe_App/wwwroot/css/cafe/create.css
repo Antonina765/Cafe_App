@@ -12,14 +12,14 @@ body {
     color: var(--text-color);
     margin: 0;
     padding: 0;
-    display: flex;
+    position: relative;
     justify-content: center;
     align-items: flex-start;
     height: 100vh;
 }
 
 form {
-    top: 120px;
+    margin: auto;
     background-color: var(--accent);
     border: 2px solid var(--primary);
     border-radius: 15px;
