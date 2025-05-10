@@ -20,4 +20,22 @@
             <button type="submit">@Cafe.Update_avatar</button>
         </form>
     </div>
+    <div class="profile-bookings">
+        <h2>Мои бронирования</h2>
+        @if(Model.Bookings != null && Model.Bookings.Any())
+        {
+        <ul>
+            @foreach(var booking in Model.Bookings)
+            {
+            <li>
+                <strong>@booking.CafeTitle</strong> – @booking.BookingDate.ToString("dd.MM.yyyy HH:mm")
+            </li>
+            }
+        </ul>
+        }
+        else
+        {
+        <p>У вас пока нет бронирований.</p>
+        }
+    </div>
 </div>

@@ -41,7 +41,10 @@
             
                 <button onclick="deleteCafe(@cafe.CafeId)" class="cafe-button cafe-button-delete">@Cafe.Delete</button>
             }
-            <button href="/Cafe/MoreInfo" class="cafe-button cafe-button-more">@Cafe.More_Info</button>
+            <!-- Используем ссылку, чтобы передать id кафе на универсальную страницу -->
+            <a class="cafe-button cafe-button-more" href="@Url.Action("MoreInfo", "Cafe", new { id = cafe.CafeId })">
+                @Cafe.More_Info
+            </a>
         </div>
     </div>
 }

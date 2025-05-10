@@ -32,6 +32,8 @@ builder.Services.AddSignalR();
 
 builder.Services.AddScoped<ICafeRepository<CafeData>, CafeRepository>();
 builder.Services.AddScoped<IUserRepository<UserData>, UserRepository>();
+builder.Services.AddScoped<IMenuRepository<MenuItemData>, MenuRepository>();
+builder.Services.AddScoped<IBookingRepository<BookingData>, BookingRepository>();
 
 var registrationHelper = new RegistrationHelper();
 registrationHelper.AutoRegisterRepositories(builder.Services);

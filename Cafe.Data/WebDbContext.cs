@@ -8,10 +8,10 @@ public class WebDbContext : DbContext
     public const string CONNECTION_STRING = "Host=localhost;Port=5432;Database=CafeApp;Username=postgres;Password=12345;";
 
     public DbSet<CafeData> Cafes { get; set; }
-    
     public DbSet<UserData> Users { get; set; }
-    
     public DbSet<ChatMessageData> ChatMessages { get; set; }
+    public DbSet<MenuItemData> MenuItems { get; set; }
+    public DbSet<BookingData> Bookings { get; set; }
     
     public WebDbContext(DbContextOptions<WebDbContext> contextOptions)
         : base(contextOptions) { }

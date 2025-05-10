@@ -15,18 +15,24 @@ public class CafeController : Controller
 {
     private ICafeRepository<CafeData> _cafeRepository;
     private IUserRepository<UserData> _userRepository;
+    private IMenuRepository<MenuItemData> _menuRepository;
+    private IBookingRepository<BookingData> _bookingRepository;
     private AuthService _authService;
     private IWebHostEnvironment _webHostEnvironment;
     private AutoMapperCafe _cafeMapper;
 
     public CafeController(ICafeRepository<CafeData> cafeRepository,
         IUserRepository<UserData> userRepository,
+        IMenuRepository<MenuItemData> menuRepository,
+        IBookingRepository<BookingData> bookingRepository,
         AuthService authService,
         IWebHostEnvironment webHostEnvironment,
         AutoMapperCafe cafeMapper)
     {
         _cafeRepository = cafeRepository;
         _userRepository = userRepository;
+        _menuRepository = menuRepository;
+        _bookingRepository = bookingRepository;
         _authService = authService;
         _webHostEnvironment = webHostEnvironment;
         _cafeMapper = cafeMapper;
@@ -159,6 +165,13 @@ public class CafeController : Controller
         {
             viewModel.UserName = _userRepository.GetUserName(userId.Value);
             viewModel.AvatarUrl = _userRepository.GetAvatarUrl(userId!.Value);
+            
+            var bookings = _bookingRepository.GetBookingsByUserId(userId.Value);
+            viewModel.Bookings = bookings.Select(b => new UserBookingViewModel
+            {
+                BookingDate = b.BookingDateTime,
+                CafeTitle = _cafeRepository.Get(b.CafeId)?.Title
+            }).ToList();
         }
         else 
         {
@@ -289,6 +302,33 @@ public class CafeController : Controller
 
         viewModel.TheNumber = DateTime.Now.Second;
         
+        return View(viewModel);
+    }
+    
+    [HttpGet]
+    public IActionResult MoreInfo(int id)
+    {
+        var cafe = _cafeRepository.Get(id);
+        if (cafe == null)
+        {
+            return NotFound();
+        }
+
+        bool isAdmin = _authService.IsAdmin();
+        ViewBag.IsAdmin = isAdmin;
+        
+        var menuItems = _menuRepository.GetMenuItemsByCafeId(id);
+    
+        var viewModel = new Models.Cafe.CafeDetailsViewModel
+        {
+            CafeId = cafe.Id,
+            Title = cafe.Title,
+            Address = cafe.Address,
+            MenuItems = menuItems,
+            BookingList = isAdmin ? _bookingRepository.GetAllBookingsByCafeId(id) : null,
+            BookingForm = !isAdmin ? new Cafe_App.Models.Booking.TableBookingViewModel { CafeId = cafe.Id } : null
+        };
+
         return View(viewModel);
     }
 }
