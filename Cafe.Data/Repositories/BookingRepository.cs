@@ -11,6 +11,7 @@ public class BookingRepository: BaseRepository<BookingData>, IBookingRepository<
 
     public void CreateBooking(BookingData booking)
     {
+        booking.BookingDateTime = booking.BookingDateTime.ToUniversalTime();
         _webDbContext.Bookings.Add(booking);
         _webDbContext.SaveChanges();
     }

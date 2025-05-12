@@ -1,4 +1,5 @@
 using System.Security.Claims;
+using System.Text;
 using Cafe_App.Attributes.AuthAttributes;
 using Cafe_App.Models.Cafe;
 using Cafe_App.Services;
@@ -316,15 +317,22 @@ public class CafeController : Controller
 
         bool isAdmin = _authService.IsAdmin();
         ViewBag.IsAdmin = isAdmin;
-        
-        var menuItems = _menuRepository.GetMenuItemsByCafeId(id);
+
+        string content;
+        var menuPath = _menuRepository.GetMenuItemsByCafeId(id).Title;
+        using (FileStream fs = new FileStream(menuPath, FileMode.Open, FileAccess.Read))
+        using (StreamReader sr = new StreamReader(fs, Encoding.UTF8))
+        {
+            content = sr.ReadToEnd(); // Читаем весь файл
+            Console.WriteLine(content); // Выводим содержимое
+        }
     
         var viewModel = new Models.Cafe.CafeDetailsViewModel
         {
             CafeId = cafe.Id,
             Title = cafe.Title,
             Address = cafe.Address,
-            MenuItems = menuItems,
+            MenuItems = content,
             BookingList = isAdmin ? _bookingRepository.GetAllBookingsByCafeId(id) : null,
             BookingForm = !isAdmin ? new Cafe_App.Models.Booking.TableBookingViewModel { CafeId = cafe.Id } : null
         };

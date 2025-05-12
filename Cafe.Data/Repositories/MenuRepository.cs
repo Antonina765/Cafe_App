@@ -9,31 +9,23 @@ public class MenuRepository : BaseRepository<MenuItemData>, IMenuRepository<Menu
     {
     }
 
-    public IEnumerable<MenuItemData> GetMenuItemsByCafeId(int cafeId)
+    public MenuItemData GetMenuItemsByCafeId(int cafeId)
     {
-        return _webDbContext.MenuItems.Where(m => m.CafeId == cafeId).ToList();
+        return _webDbContext.MenuItems.FirstOrDefault(m => m.CafeId == cafeId);
     }
 
     public void ProcessMenuFile(string filePath, int cafeId)
     {
         if (!File.Exists(filePath))
             return;
-        
-        var lines = File.ReadAllLines(filePath);
-        foreach (var line in lines)
+
+        var menuItem = new MenuItemData
         {
-            var tokens = line.Split(";");
-            if (tokens.Length >= 2)
-            {
-                var MenuItemData = new MenuItemData
-                {
-                    CafeId = cafeId,
-                    Title = tokens[0],
-                    Description = tokens[1],
-                };
-                _webDbContext.MenuItems.Add(MenuItemData);
-            }
-        }
+            CafeId = cafeId,
+            Title = filePath,
+            Description = "aaa"
+        };
+        _webDbContext.MenuItems.Add(menuItem);
         _webDbContext.SaveChanges();
     }
 }

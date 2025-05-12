@@ -50,6 +50,7 @@
     <ItemGroup>
       <Folder Include="Attributes\" />
       <Folder Include="wwwroot\images\cafes\posts\" />
+      <Folder Include="wwwroot\uploads\menus\" />
     </ItemGroup>
 
 </Project>

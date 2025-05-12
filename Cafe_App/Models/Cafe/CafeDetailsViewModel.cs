@@ -9,7 +9,7 @@ public class CafeDetailsViewModel
     public string Title { get; set; }
     public string Address { get; set; }
     
-    public IEnumerable<MenuItemData> MenuItems { get; set; }
+    public string MenuItems { get; set; }
     public IEnumerable<BookingData> BookingList { get; set; }
     
     public TableBookingViewModel BookingForm { get; set; }

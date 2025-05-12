@@ -59,7 +59,7 @@ public class BookingController : Controller
         _menuRepository.ProcessMenuFile(filePath, cafeId);
         
         ViewBag.Message = "Menu uploaded";
-        return View();
+        return RedirectToAction("Index", "Cafe");
     }
 
     [HttpPost]
@@ -93,8 +93,7 @@ public class BookingController : Controller
         }
         
         TempData["SuccessMessage"] = "Стол успешно забронирован!";
-        return RedirectToAction("MoreInfo", "CafeDetails", new { id = bookingViewModel.CafeId });
-
+        return RedirectToAction("MoreInfo", "Cafe", new { id = bookingViewModel.CafeId });
     }
 
     [HttpGet]

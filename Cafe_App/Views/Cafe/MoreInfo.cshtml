@@ -60,12 +60,9 @@ else
         @if(Model.MenuItems != null && Model.MenuItems.Any())
         {
             <ul class="menu-items">
-                @foreach(var item in Model.MenuItems)
-                {
-                    <li>
-                        <strong>@item.Title</strong> – @item.Description
-                    </li>
-                }
+                <li>
+                    <strong>@Model.MenuItems</strong>
+                </li>
             </ul>
         }
         else
@@ -74,8 +71,8 @@ else
         }
 
         <h2>Бронирование стола</h2>
-        <form method="post" action="@Url.Action("BookTable", "Booking")">
-            <input type="hidden" name="RestaurantId" value="@Model.CafeId" />
+        <form method="post" action="@Url.Action("BookingTable", "Booking")">
+            <input type="hidden" name="CafeId" value="@Model.CafeId" />
             <div>
                 <label for="Date">Дата и время:</label>
                 <input type="datetime-local" id="Date" name="Date" required />

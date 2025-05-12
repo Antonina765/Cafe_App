@@ -16,8 +16,8 @@ namespace Cafe_App.Controllers
 {
     public class AuthController : Controller
     {
-        public IUserRepository<UserData> _userRepository;
-        public IHubContext<ChatHub, IChatHub> _chatHub;
+        private IUserRepository<UserData> _userRepository;
+        private IHubContext<ChatHub, IChatHub> _chatHub;
 
         public AuthController(IUserRepository<UserData> userRepository, 
             IHubContext<ChatHub, IChatHub> chatHub)
