@@ -16,6 +16,10 @@
     <script src="~/js/index.js"></script>
 }
 
+@section NameSection {
+    @Cafe.Cafe_Cafes
+}
+
 @foreach (var cafe in Model)
 {
     <div class="cafe-container" data-cafeid="@cafe.CafeId">
