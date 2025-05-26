@@ -1,0 +1,33 @@
+@using Cafe_App.Localizations
+@using Cafe_App.Models.Cafe
+@model ChatViewModel
+
+@{
+    Layout ="~/Views/Shared/_LayoutCafe.cshtml";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/chat.css" />
+}
+
+<input type="hidden" class="user-id" value="@Model.UserId" />
+<input type="hidden" class="user-name" value="@Model.UserName" />
+
+<!-- Область сообщений -->
+<div class="chat-messages">
+    <div class="messages">
+        <!-- Шаблон сообщения (будет клонироваться при добавлении нового сообщения) -->
+        <div class="message template">***</div>
+    </div>
+</div>
+
+<!-- Поле ввода нового сообщения -->
+<div class="chat-input">
+    <input class="new-message" placeholder="Введите сообщение..." />
+    <button class="send-new-message" type="button">@Cafe.Send</button>
+</div>
+
+<!-- Подключение jQuery (из CDN) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Подключение файла с JavaScript логикой чата -->
+<script src="~/js/Tchat.js"></script>

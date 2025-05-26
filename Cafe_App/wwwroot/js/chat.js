@@ -82,4 +82,24 @@ $(document).ready(function () {
         messageBlock.text(message);
         $(".messages").append(messageBlock);
     }
+
+    // Инициализация состояния переключателя из localStorage
+    var toggleState = localStorage.getItem("toggleState");
+    if (toggleState === "true") {
+        $("#refreshSwitch").prop("checked", true);
+        $("#switch-label").text("TCP чат");
+    } else {
+        $("#refreshSwitch").prop("checked", false);
+        $("#switch-label").text("Чат");
+    }
+
+    // При изменении состояния переключателя сохраняем новое значение
+    $("#refreshSwitch").change(function(){
+        if ($(this).is(":checked")) {
+            localStorage.setItem("toggleState", "true");
+        } else {
+            localStorage.setItem("toggleState", "false");
+        }
+        window.location.href = window.location.href; // страница перезагружается и включается другой чат
+    });
 });
