@@ -1,8 +1,13 @@
+@using Cafe_App.Localizations
 @model Cafe_App.Models.Cafe.CafeDetailsViewModel
 
 @{
     Layout = "~/Views/Shared/_LayoutCafe.cshtml";
     bool isAdmin = ViewBag.IsAdmin ?? false;
+}
+
+@section NameSection {
+    @Cafe.Cafe_Cafes
 }
 
 <div class="cafe-details">

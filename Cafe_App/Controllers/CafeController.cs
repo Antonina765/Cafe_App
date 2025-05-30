@@ -319,12 +319,19 @@ public class CafeController : Controller
         ViewBag.IsAdmin = isAdmin;
 
         string content;
-        var menuPath = _menuRepository.GetMenuItemsByCafeId(id).Title;
-        using (FileStream fs = new FileStream(menuPath, FileMode.Open, FileAccess.Read))
-        using (StreamReader sr = new StreamReader(fs, Encoding.UTF8))
+        var menuItem = _menuRepository.GetMenuItemsByCafeId(id);
+        if (menuItem == null || string.IsNullOrEmpty(menuItem.Title) || !System.IO.File.Exists(menuItem.Title))
         {
-            content = sr.ReadToEnd(); // Читаем весь файл
-            Console.WriteLine(content); // Выводим содержимое
+            content = "Меню не загружено";
+        }
+        else
+        {
+            // Если файл существует, читаем его содержимое
+            using (FileStream fs = new FileStream(menuItem.Title, FileMode.Open, FileAccess.Read))
+            using (StreamReader sr = new StreamReader(fs, Encoding.UTF8))
+            {
+                content = sr.ReadToEnd();
+            }
         }
     
         var viewModel = new Models.Cafe.CafeDetailsViewModel
